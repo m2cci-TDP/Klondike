@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------*/
-/* Reussites. Cecile Dumas, Catherine Parent, octobre 2005, 
+/* Reussites. Cecile Dumas, Catherine Parent, octobre 2005,
    d'apres les algorithmes de Pierre-Claude Scholl              */
 /*--------------------------------------------------------------*/
 
@@ -9,16 +9,16 @@
 /* Interaction avec l'utilisateur */
 
 /* ----------------------------------------------------------
- * CONSTANTES 
+ * CONSTANTES
  * ----------------------------------------------------------
 */
 
-#define         NbMaxEssais              5 
-#define         Invite                   "Votre Choix (? pour liste des commandes) : " 
-#define         TexteSimulationR7        '1' 
-#define         TexteAnalyseR7           '2' 
-#define         TexteFin                 'F' 
-#define         TexteAide                '?' 
+#define         NbMaxEssais              5
+#define         Invite                   "Votre Choix (? pour liste des commandes) : "
+#define         TexteSimulationR7        '1'
+#define         TexteAnalyseR7           '2'
+#define         TexteFin                 'F'
+#define         TexteAide                '?'
 
 /* -------------------------------------------------------------------
  * CodeCommande   : le type [SIMULR7, ANALYSER7, FIN]
@@ -30,15 +30,17 @@ typedef enum {SIMULR7, ANALYSER7, FIN}     CodeCommande ;
 /* -------------------------------------------------------------------
  *      INTERACTION
  *
- *      EstTexteCommande : un caractère ---> un booléen
+ *      EstTexteCommande : un caractï¿½re ---> un boolï¿½en
  *      EcrireMenu       : une action
- *      SaisirCommande   : une action (le résultat : un CodeCommande)
+ *      SaisirCommande   : une action (le rï¿½sultat : un CodeCommande)
  * -------------------------------------------------------------------
 */
 
 void	LireCar (char	*c)
-{	int l ;
-	while (isspace ( l=getchar ())) ;  *c = l ; 
+{
+	int l ;
+	while (isspace (l=getchar ())) ;  
+	*c = l ;
 }
 
 int EstTexteCommande (char c)
@@ -51,44 +53,44 @@ int EstTexteCommande (char c)
 
 void EcrireMenu ()
 {
-  printf ("Tapez \n") ; 
-  printf ("%c pour Simulation graphique de la reussite R7, \n",TexteSimulationR7) ; 
+  printf ("Tapez \n") ;
+  printf ("%c pour Simulation graphique de la reussite R7, \n",TexteSimulationR7) ;
   printf (" %c pour Analyse d une serie de reussites R7 (sans affichage graphique), \n",TexteAnalyseR7);
   printf (" %c pour Fin, \n",TexteFin);
-  printf (" %c pour Aide.\n",TexteAide); 
+  printf (" %c pour Aide.\n",TexteAide);
 }
 
-void SaisirCommande (CodeCommande *CC) 
+void SaisirCommande (CodeCommande *CC)
 {
   char C  ;
   int  NbEssais ;
 
   printf (Invite) ; LireCar (&C) ;
   NbEssais = 0 ;
-  while ((NbEssais < NbMaxEssais) && (! EstTexteCommande (C))) 
+  while ((NbEssais < NbMaxEssais) && (! EstTexteCommande (C)))
     {
-      if (C == TexteAide) 
+      if (C == TexteAide)
 	{
-	  EcrireMenu ()  ; 
+	  EcrireMenu ()  ;
 	  LireCar (&C) ;
 	}
-      else 
+      else
 	{
 	  printf ("Commande incorrecte.");
 	  NbEssais++ ;
 	  if (NbEssais < NbMaxEssais)
 	    {
-	      printf (Invite) ; 
+	      printf (Invite) ;
 	      LireCar (&C) ;
-	    } 
+	    }
 	}
-    } 
-  if (NbEssais == NbMaxEssais) 
+    }
+  if (NbEssais == NbMaxEssais)
     *CC = FIN  ;
-  else switch (C)  
+  else switch (C)
     {
     case TexteSimulationR7 : *CC = SIMULR7 ; break ;
     case TexteAnalyseR7 :    *CC = ANALYSER7 ; break ;
     case TexteFin :          *CC = FIN ; break ;
-    } 
-} 
+    }
+}

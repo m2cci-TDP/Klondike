@@ -14,13 +14,14 @@ INCL=${DIR}/include
 #	chgrp dsu-ens *.o
 #	chmod g+w *.o
 
-libmachine_trace.a: machine_trace.o graphlib_w.o
-	ar rc libmachine_trace.a machine_trace.o graphlib_w.o
+libmachine_trace.a: machine_trace.o graphlib_w.o memoire.o Fichiers.o
+	ar rc libmachine_trace.a machine_trace.o graphlib_w.o memoire.o Fichiers.o
 #	chgrp dsu-ens libmachine_trace.a
 #	chmod g+w libmachine_trace.a
 
 clean:
-	rm -f $(LIB)/*.a $(LIB)/*.o *~
+	rm -f $(LIB)/*.a $(LIB)/*.o $(LIN)/*~
+	rm -f *.a *.o *~
 
 install:
 	mkdir -p $(LIB)
