@@ -1,24 +1,29 @@
 ## Klondike
 
 ### install the game
+
 git clone https://github.com/m2cci-TDP/Klondike.git
 cd Klondike
 make
 
 ### run
+
 ./Reussites.e
 
 ### work
+
 git clone https://github.com/m2cci-TDP/Klondike.git
 cd Klondike
 git checkout dev
 
 #### push a change
+
 git add *
 git commit -m "nom du commit"
 git push origin dev
 
 #### pull changing
+
 git pull
 
 ## Welcome to GitHub Pages
