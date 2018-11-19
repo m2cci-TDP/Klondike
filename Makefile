@@ -1,12 +1,15 @@
 
 .SUFFIXES:
-.SUFFIXES: .c .o 
+.SUFFIXES: .c .o
 
-DIR = /home/c/carrierf/LIB_REUSSITES
+#DIR = /home/theo/Documents/M2CCI/Klondike/LIB_REUSSITES/
+DIR = LIB_REUSSITES
 INCL = ${DIR}/include
 LIB = ${DIR}/lib
 
 .c.o :
+	make -C LIB_REUSSITES/src
+	make install -C LIB_REUSSITES/src
 	gcc -Wall -g -ansi -c -I${INCL} $<
 
 ReussiteR7.e: ${LIB}/libmachine_trace.a Alea.o Tas.o AfficherTas.o R7.o InteractionR7.o ReussiteR7.c
@@ -23,4 +26,3 @@ Reussites.e: ${LIB}/libmachine_trace.a Alea.o Tas.o AfficherTas.o R7.o C4.o QLL.
 
 clean:
 	rm -f AfficherTas.o Alea.o InteractionR7.o R7.o *.e
-
