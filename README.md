@@ -2,9 +2,9 @@
 
 ### install the game
 
-git clone https://github.com/m2cci-TDP/Klondike.git
-cd Klondike
-make
+git clone https://github.com/m2cci-TDP/Klondike.git \n
+cd Klondike \n
+make \n
 
 ### run
 
