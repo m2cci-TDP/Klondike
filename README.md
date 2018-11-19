@@ -8,6 +8,19 @@ make
 ### run
 ./Reussites.e
 
+### work
+git clone https://github.com/m2cci-TDP/Klondike.git
+cd Klondike
+git checkout dev
+
+#### push a change
+git add *
+git commit -m "nom du commit"
+git push origin dev
+
+#### pull changing
+git pull
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/m2cci-TDP/Klondike/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
