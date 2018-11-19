@@ -1,3 +1,6 @@
+#ifndef _FICHIERS_H
+#define _FICHIERS_H
+
 #include <stdio.h>
 
 extern  char    *LireFichierLigne (FILE *f, char l[]) ;
@@ -12,3 +15,5 @@ extern  FILE    *OuvrirFichierEcriture (char n[]) ;
 extern  void    FermerFichier (FILE *f) ;
 extern  int     FichierInexistant (FILE *f) ;
 extern  int     FinFichier (char t[]) ;
+
+#endif

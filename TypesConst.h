@@ -6,6 +6,9 @@
    --> tas representes par des listes chainees
 ----------------------------------------------------------------*/
 
+#ifndef _TYPES_CONST_H
+#define _TYPES_CONST_H
+
 /*-----------------------------------------*/
 /* Définitions des constantes et des types */
 /*-----------------------------------------*/
@@ -71,11 +74,12 @@ typedef ValeurCarte Carte;
 /* Représentation des tas */
 
 /* Type struct adCarte pour representer une liste de Cartes doublement chainee */
-struct adCarte {
+typedef struct adCarte {
    Carte elt;
    struct adCarte *suiv;
    struct adCarte *prec;
-};
+} adCarte;
+typedef adCarte *pAdCarte;
 
 typedef struct {
   Localisation LT;
@@ -84,11 +88,13 @@ typedef struct {
   /* modif F. Carrier : juillet 2012 */
   /* liste de cartes */
   int HT;	          /* hauteur du tas, entier entre 0 et HmTas */
-  struct adCarte *tete; /* Liste Cartes */
-  struct adCarte *queue; /* Liste Cartes */
+  pAdCarte tete; /* Liste Cartes */
+  pAdCarte queue; /* Liste Cartes */
     /* la premiere carte (tete) est celle du dessous, la derniere (queue) celle du dessus */
 } Tas;
 
 /* Mode de Trace des Reussites */
 
 typedef enum {SansTrace, AvecTrace} ModeTrace;
+
+#endif

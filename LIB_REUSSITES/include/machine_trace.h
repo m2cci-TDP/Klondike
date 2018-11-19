@@ -1,11 +1,11 @@
 /*======================================================================
-     
+
     INTERFACE DE LA MACHINE_TRACE
 
     machine_trace.h
 
 
-    mettre la directive #include "machine_trace.h" 
+    mettre la directive #include "machine_trace.h"
     apres l'entete de programme dans le programme l'utilisant
 
    Modif. P.Habraken 23/05/2005 :
@@ -14,38 +14,38 @@
 ======================================================================*/
 
 /*======================================================================
-  Machine de trace  de dessins                                                
+  Machine de trace  de dessins
 ========================================================================
   SPECIFICATIONS  :
   L'etat de la machine est caracterise par l'etat de deux composants :
   l'ecran et la plume de trace.
   L'etat de la plume est defini par:
-         - position courante de la plume dans le plan (notee pp)                            
+         - position courante de la plume dans le plan (notee pp)
           definie par des coordonnees cartesiennes ds le repere utilisateur:
           origine au centre, x vers la droite, y vers le haut
-         - direction courante (notee cap)                                     
-          definie par un angle en degres par rapport a l'axe Ox, 
+         - direction courante (notee cap)
+          definie par un angle en degres par rapport a l'axe Ox,
           dans le sens trigo
          - position d'ecriture (notee pe) : basse ou haute
- 
+
 
   Les primitives de la machine :
 
-    Vider        efface l'ecran et place la plume au centre, 
+    Vider        efface l'ecran et place la plume au centre,
                   position haute, cap Ouest-Est
     Effacer      efface l'ecran sans modifier l'etat de la plume.
-    Placer       fixe la position de la plume, en coordonnees absolues                                            
-    Orienter     fixe la direction de la plume, par rapport a l'axe des x                                        
-    Avancer      Avance dans la direction courante                    
+    Placer       fixe la position de la plume, en coordonnees absolues
+    Orienter     fixe la direction de la plume, par rapport a l'axe des x
+    Avancer      Avance dans la direction courante
     Reculer      Recule dans la direction courante
     TournerGauche    Tourne a gauche
     TournerDroite    Tourne a droite
-    Lever        Leve la plume                                        
-    Baisser      Baisse la plume                                    
+    Lever        Leve la plume
+    Baisser      Baisse la plume
 
   Primitives "C" :
 
-    Initialiser    initialisation de l'environnement graphique, 
+    Initialiser    initialisation de l'environnement graphique,
                    necessaire avant toute utilisation de la machine de trace
     Terminer       fin de l'utilisation du mode graphique
     Attendre       attente d'une touche au clavier
@@ -55,18 +55,21 @@ REALISATION :
 
     L'etat de l'ecran (points allumes) n'est pas gere ici.
     L'etat de la plume est represente par les donnees suivantes :
-            - 2 reels xa,ya : coordonnees cartesiennes du point courant, 
-            dans le repere machine (origine en haut a gauche, y croissant 
+            - 2 reels xa,ya : coordonnees cartesiennes du point courant,
+            dans le repere machine (origine en haut a gauche, y croissant
             vers le bas)
             - 1 reel da : direction courante : angle par rapport a l'axe des
             x, dans le sens trigo, en radians.
-            - 1 valeur de type PosEcr = (Haute, Basse)  pour la position 
+            - 1 valeur de type PosEcr = (Haute, Basse)  pour la position
             d'ecriture
-  
-    DegresVersRadians : la fonction : un reel -> un reel    
-    conversion degres vers radians 
+
+    DegresVersRadians : la fonction : un reel -> un reel
+    conversion degres vers radians
 
 ======================================================================*/
+
+#ifndef _MACHINE_TRACE_H
+#define _MACHINE_TRACE_H
 
 typedef enum {Rouge, Vert, Bleu, Jaune, Noir} Couleur ;
 /* couleurs de base */
@@ -78,7 +81,7 @@ extern    void    Initialiser ()     ;
  */
 
 extern    void    Terminer ()     ;
-/*  e.i. : 
+/*  e.i. :
     e.f. : le mode graphique n'est plus utilisable
  */
 
@@ -122,7 +125,7 @@ extern    Couleur CouleurSuivante(Couleur c) ;
 extern    void    Avancer (double L)     ;
 /*  e.i. : pp = (x0, y0), cap = d0, pe = pe0
     e.f. : on a avance de L dans la direction d0, cad :
-           - pp = (x1, y1) 
+           - pp = (x1, y1)
            - cap = do (inchange)
            - pe = pe0 (inchange)
            - si pe0 = Basse, le segment [(x0,y0), (x1,y1)] est trace
@@ -131,7 +134,7 @@ extern    void    Avancer (double L)     ;
 extern    void     Reculer (double  L)     ;
 /*  e.i. : pp = (x0, y0), cap = d0, pe = pe0
     e.f. : on a recule de L dans la direction d0, cad :
-           - pp = (x1, y1) 
+           - pp = (x1, y1)
            - cap = do (inchange)
            - pe = pe0 (inchange)
            - si pe0 = Basse, le segment [(x0,y0), (x1,y1)] est trace
@@ -167,3 +170,5 @@ extern    void     Attendre ()    ;
 #define Re(l)     Reculer(l)
 #define TrG(a)    TournerGauche(a)
 #define TrD(a)    TournerDroite(a)
+
+#endif

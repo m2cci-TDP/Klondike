@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------*/
 /* Reussites. Cecile Dumas, Catherine Parent, octobre 2005,
-   d'apres les algorithmes de Pierre-Claude Scholl              */
+d'apres les algorithmes de Pierre-Claude Scholl              */
 /*--------------------------------------------------------------*/
 
 #include <stdio.h>
@@ -12,9 +12,9 @@
 #include "Alea.h"
 
 /* -------------------------------------------------------------------
- *      PROGRAMME PRINCIPAL AVEC MENU D'INTERACTION
- * -------------------------------------------------------------------
- */
+*      PROGRAMME PRINCIPAL AVEC MENU D'INTERACTION
+* -------------------------------------------------------------------
+*/
 #define         TexteBienvenue           "Bienvenue \n"
 #define         TexteNbASimuler          "Choisissez le nombre de parties a simuler : "
 #define         TexteNbAAnalyser         "Choisissez le nombre de parties a analyser : "
@@ -33,19 +33,22 @@ int main(void)
   SaisirCommande (&Commande) ;
   while (Commande != FIN) {
     switch  (Commande) {
-    case SIMULR7 :
-      printf(TexteNbASimuler);
-      scanf("%d",&nbparties);
-      OuvrirGraphique("R7");
-      ObserverR7(nbparties, NBMAXT);
-      FermerGraphique();
-      break ;
+      case SIMULR7 :
+        printf(TexteNbASimuler);
+        scanf("%d",&nbparties);
+        OuvrirGraphique("R7");
+        ObserverR7(nbparties, NBMAXT);
+        FermerGraphique();
+        break ;
 
-    case ANALYSER7 :
-      printf(TexteNbAAnalyser);
-      scanf("%d",&nbparties);
-      AnalyserR7(nbparties,NBMAXT);
-      break;
+      case ANALYSER7 :
+        printf(TexteNbAAnalyser);
+        scanf("%d",&nbparties);
+        AnalyserR7(nbparties,NBMAXT);
+        break;
+
+      default:
+        break;
     }
     SaisirCommande (&Commande) ;
 

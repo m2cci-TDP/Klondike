@@ -1,3 +1,6 @@
+#ifndef _ENTREES_SORTIES_H
+#define _ENTREES_SORTIES_H
+
 #include <stdio.h>
 
 extern	void	LireEntier (int		*) ;
@@ -29,3 +32,5 @@ extern  FILE    *OuvrirFichierEcriture (char n[]) ;
 extern  void    FermerFichier (FILE *f) ;
 extern  int     FichierInexistant (FILE *f) ;
 extern  int     FinFichier (char t[]) ;
+
+#endif

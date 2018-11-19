@@ -8,6 +8,7 @@ modifie par F. Carrier, juillet 2012
 
 #include "Tas.h"
 #include "Alea.h"
+#include <stdio.h>
 
 /*-----------------------------------*/
 /* Specifications des objets de base */
@@ -98,10 +99,8 @@ void CreerTasVide(Localisation L, Mode M, Tas *T) {
   T->RT = inactif;
   T->MT = M;
   T->HT = 0;
-  T->tete = (adCarte*)malloc(sizeof(adCarte));
-  T->queue = T->tete;
-  T->tete->suiv = NULL;
-  T->tete->prec = NULL;
+  T->tete = NULL;
+  T->queue = NULL;
 }
 
 /* *************************************************************
@@ -111,6 +110,11 @@ devient libre pour un autre tas.
 Pré-condition : le tas T est vide et actif
 **************************************************************** */
 void SupprimerTasVide(Tas *T) {
+  if (T->HT == 0 && T->RT == actif && T->tete == NULL && T->queue == NULL) {
+    T->LT.NL = -1;
+    T->LT.NC = -1;
+    T->RT = inactif;
+  }
 }
 
 /* *************************************************************
@@ -118,10 +122,63 @@ void CreerJeuNeuf(int N, Localisation L, Tas *T)
 forme en L le tas empilé T avec l'ensemble des N cartes du jeu dans
 l'ordre des cartes et faces cachées.
 Donne leur valeur aux variables globales NbCartes et PremierRang.
-Pr�-condition : l'emplacement L est libre
+Pré-condition : l'emplacement L est libre
 N==52 ou N==32
 **************************************************************** */
 void CreerJeuNeuf(int N, Localisation L, Tas *T) {
+  pAdCarte newCarte = NULL;
+  Couleur couleurCourante = PremiereCouleur;
+  Rang rangCourant = PremierRang;
+
+  if (N != 52 || N != 32) {
+    printf("A deck of cards must have 52 or 32 cards...");
+    exit(1);
+  } else {
+    // initialisation de la variable globale PremierRang
+    switch (N) {
+      case 52:
+        PremierRang = Deux;
+        break;
+      case 32:
+        PremierRang = Sept;
+        break;
+    }
+  }
+  T->LT = L;
+  NbCartes = N; // init variable globale NbCartes
+
+  // Création de la première cellule Carte
+  T->tete = (pAdCarte)malloc(sizeof(adCarte));
+  T->tete->elt.CC = couleurCourante;
+  T->tete->elt.RC = rangCourant;
+  T->tete->elt.VC = Cachee;
+  T->tete->suiv = NULL;
+  T->tete->prec = NULL;
+  T->queue = T->tete; // tete=queue
+
+  // remplissage du paquet de carte par ajout en queue
+  while (T->HT <= N) {
+    newCarte = (pAdCarte)malloc(sizeof(adCarte));
+    if (newCarte == NULL) {
+      printf("Memory full...");
+      exit(1);
+    } else {
+      if (rangCourant < DernierRang) {
+        rangCourant = (Rang)((int)rangCourant + 1);
+      } else {
+        rangCourant = PremierRang;
+        couleurCourante = (Couleur)((int)couleurCourante + 1);
+      }
+
+      newCarte->elt.CC = couleurCourante;
+      newCarte->elt.RC = rangCourant;
+      newCarte->elt.VC = Cachee;
+      newCarte->suiv = T->queue->suiv;
+      newCarte->prec = T->queue;
+      T->queue->suiv = newCarte;
+      T->queue = newCarte;
+    }
+  }
 }
 
 /* Consultation des cartes d'un tas: ne deplace pas la carte */
