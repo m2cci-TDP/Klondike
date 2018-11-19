@@ -20,7 +20,8 @@ libmachine_trace.a: machine_trace.o graphlib_w.o
 #	chmod g+w libmachine_trace.a
 
 clean:
-	/bin/rm -f *.a *.o *~
+	rm -f $(LIB)/*.a $(LIB)/*.o *~
 
 install:
+	mkdir -p $(LIB)
 	mv *.o *.a ${LIB}/
