@@ -2,30 +2,32 @@
 
 ### install the game
 
-git clone https://github.com/m2cci-TDP/Klondike.git <br />
-cd Klondike <br />
-make
+`git clone https://github.com/m2cci-TDP/Klondike.git` <br />
+`cd Klondike` <br />
+`make`
 
 ### run
 
-./Reussites.e
+`./Reussites.e`
 
 ### work
 
-git clone https://github.com/m2cci-TDP/Klondike.git <br />
-cd Klondike <br />
-git checkout dev
+`git clone https://github.com/m2cci-TDP/Klondike.git` <br />
+`cd Klondike` <br />
+`git checkout dev`
 
 #### push a change
 
-git add * <br />
-git commit -m "nom du commit" <br />
-git push origin dev
+`git add *` <br />
+`git commit -m "nom du commit"` <br />
+`git push origin dev`
 
-#### pull changing
+#### pull changing before work
 
-git pull
+`git pull`
 
+
+<!--
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/m2cci-TDP/Klondike/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
@@ -63,3 +65,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+-->
