@@ -148,24 +148,33 @@ void CreerJeuNeuf(int N, Localisation L, Tas *T) {
   NbCartes = N; // init variable globale NbCartes
 
   // Création de la première cellule Carte
-  T->tete = (pAdCarte)malloc(sizeof(adCarte));
-  T->tete->elt.CC = couleurCourante;
-  T->tete->elt.RC = rangCourant;
-  T->tete->elt.VC = Cachee;
-  T->tete->suiv = NULL;
-  T->tete->prec = NULL;
-  T->queue = T->tete; // tete=queue
+  newCarte = (pAdCarte)malloc(sizeof(adCarte));
+  if (newCarte == NULL) {
+    printf("Memory full...");
+    exit(1);
+  } else {
+    T->tete = newCarte;
+    T->tete->elt.CC = couleurCourante;
+    T->tete->elt.RC = rangCourant;
+    T->tete->elt.VC = Cachee;
+    T->tete->suiv = NULL;
+    T->tete->prec = NULL;
+    T->queue = T->tete; // tete=queue
+    T->HT++;
+  }
 
   // remplissage du paquet de carte par ajout en queue
-  while (T->HT <= N) {
+  while (T->HT < N) {
     newCarte = (pAdCarte)malloc(sizeof(adCarte));
     if (newCarte == NULL) {
       printf("Memory full...");
       exit(1);
     } else {
       if (rangCourant < DernierRang) {
+        // même couleur, incrémentation du rang
         rangCourant = (Rang)((int)rangCourant + 1);
       } else {
+        // changement de couleur
         rangCourant = PremierRang;
         couleurCourante = (Couleur)((int)couleurCourante + 1);
       }
@@ -177,6 +186,7 @@ void CreerJeuNeuf(int N, Localisation L, Tas *T) {
       newCarte->prec = T->queue;
       T->queue->suiv = newCarte;
       T->queue = newCarte;
+      T->HT++;
     }
   }
 }
