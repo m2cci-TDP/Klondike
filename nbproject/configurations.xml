@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="LIB_REUSSITES">
+        <df name="src">
+          <in>EntreesSorties.c</in>
+          <in>Fichiers.c</in>
+          <in>graphlib_w.c</in>
+          <in>machine_trace.c</in>
+          <in>memoire.c</in>
+        </df>
+      </df>
+      <in>AfficherTas.c</in>
+      <in>Alea.c</in>
+      <in>InteractionR7.c</in>
+      <in>R7.c</in>
+      <in>ReussiteR7.c</in>
+      <in>Tas.c</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="AfficherTas.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Alea.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="InteractionR7.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="LIB_REUSSITES/src/EntreesSorties.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="LIB_REUSSITES/src/Fichiers.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="LIB_REUSSITES/src/graphlib_w.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="LIB_REUSSITES/src/machine_trace.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="LIB_REUSSITES/src/memoire.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="R7.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ReussiteR7.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Tas.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
