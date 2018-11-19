@@ -1,13 +1,13 @@
 /*--------------------------------------------------------------*/
-/* Réussites. Michel Bonin, Catherine Parent, octobre 2005, 
-   d'après les algorithmes de Pierre-Claude Scholl              
+/* RÃ©ussites. Michel Bonin, Catherine Parent, octobre 2005,
+   d'aprÃ¨s les algorithmes de Pierre-Claude Scholl
    modifie par F. Carrier, juillet 2012
    --> types enumeres : Couleur, Rang
    --> tas representes par des listes chainees
 ----------------------------------------------------------------*/
 
 /*-----------------------------------------*/
-/* Définitions des constantes et des types */
+/* DÃ©finitions des constantes et des types */
 /*-----------------------------------------*/
 
 typedef int booleen;
@@ -16,7 +16,7 @@ typedef int booleen;
 #define faux 0
 
 /* Couleurs */
-/* Ordre croissant sur les couleurs: trèfle, carreau, coeur, pique */
+/* Ordre croissant sur les couleurs: trÃ¨fle, carreau, coeur, pique */
 
 typedef enum {VideC, Trefle, Carreau, Coeur, Pique} Couleur;
 
@@ -29,8 +29,8 @@ typedef enum {VideC, Trefle, Carreau, Coeur, Pique} Couleur;
 typedef enum {VideR0, VideR1, Deux, Trois, Quatre, Cinq, Six, Sept, Huit, Neuf, Dix,
                Valet, Dame, Roi, As} Rang;
 
-Rang PremierRang;	
-/* Deux pour un jeu de 52 cartes, Sept pour un jeu de 32 cartes 
+Rang PremierRang;
+/* Deux pour un jeu de 52 cartes, Sept pour un jeu de 32 cartes
    A intialiser suivant la reussite */
 #define DernierRang As
 
@@ -46,15 +46,15 @@ typedef struct {
   int NL;  /* ligne */
   int NC;  /* colonne */
 } Localisation;
-	
-int NbCartes;	/* entier égal à 32 ou 52 */
+
+int NbCartes;	/* entier Ã©gal Ã  32 ou 52 */
 #define HmTas 52
 
 /*--------------------------------------------------------------------*/
-/* Représentation des primitives de manipulation des cartes et des tas*/
+/* ReprÃ©sentation des primitives de manipulation des cartes et des tas*/
 /*--------------------------------------------------------------------*/
 
-/* Représentation des cartes */
+/* ReprÃ©sentation des cartes */
 
 typedef booleen Visibilite;
 #define Cachee faux
@@ -68,7 +68,7 @@ typedef struct {
 
 typedef ValeurCarte Carte;
 
-/* Représentation des tas */
+/* ReprÃ©sentation des tas */
 
 /* Type struct adCarte pour representer une liste de Cartes doublement chainee */
 struct adCarte {
@@ -92,4 +92,3 @@ typedef struct {
 /* Mode de Trace des Reussites */
 
 typedef enum {SansTrace, AvecTrace} ModeTrace;
-

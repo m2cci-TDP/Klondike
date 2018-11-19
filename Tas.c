@@ -1,9 +1,9 @@
 /*--------------------------------------------------------------*/
 /* Reussites. Michel Bonin, Catherine Parent, octobre 2005,
-   d'apres les algorithmes de Pierre-Claude Scholl
-   modifie par F. Carrier, juillet 2012
-   --> types enumeres : Couleur, Rang
-   --> tas representes par des listes chainees
+d'apres les algorithmes de Pierre-Claude Scholl
+modifie par F. Carrier, juillet 2012
+--> types enumeres : Couleur, Rang
+--> tas representes par des listes chainees
 ----------------------------------------------------------------*/
 
 #include "Tas.h"
@@ -33,7 +33,7 @@ Rang RangSuivant(Rang R) {
 
 /* Representation des cartes */
 
-	/* Testeurs et selecteurs */
+/* Testeurs et selecteurs */
 
 Rang LeRang(Carte C) {
 }
@@ -47,7 +47,7 @@ Visibilite EstCachee(Carte C) {
 Visibilite EstDecouverte(Carte C) {
 }
 
-	/* Comparaison de cartes */
+/* Comparaison de cartes */
 
 booleen RangInferieur(Carte C1, Carte C2) {
 }
@@ -66,7 +66,7 @@ booleen EstCarteAvant(Carte C1, Carte C2) {
 
 /* Representation des tas */
 
-	/* Testeurs et selecteurs */
+/* Testeurs et selecteurs */
 
 booleen TasActif(Tas T) {
 }
@@ -86,37 +86,45 @@ int LaHauteur(Tas T) {
 Localisation LaPlace(Tas T) {
 }
 
-	/* Constructeurs */
+/* Constructeurs */
 
 /* *************************************************************
 void CreerTasVide(Localisation L, Mode M, Tas *T)
-associe � T un tas vide actif plac� en L et de mode d'�talement M.
-Pr�-condition : l'emplacement L est disponible
+associe à T un tas vide actif placé en L et de mode d'étalement M.
+Pré-condition : l'emplacement L est disponible
 **************************************************************** */
 void CreerTasVide(Localisation L, Mode M, Tas *T) {
+  T->LT = L;
+  T->RT = inactif;
+  T->MT = M;
+  T->HT = 0;
+  T->tete = (adCarte*)malloc(sizeof(adCarte));
+  T->queue = T->tete;
+  T->tete->suiv = NULL;
+  T->tete->prec = NULL;
 }
 
 /* *************************************************************
 void SupprimerTasVide(Tas *T)
 rend le tas vide inactif. En particulier, la place qu'il occupait
 devient libre pour un autre tas.
-Pr�-condition : le tas T est vide et actif
+Pré-condition : le tas T est vide et actif
 **************************************************************** */
 void SupprimerTasVide(Tas *T) {
 }
 
 /* *************************************************************
 void CreerJeuNeuf(int N, Localisation L, Tas *T)
-forme en L le tas empil� T avec l'ensemble des N cartes du jeu dans
-l'ordre des cartes et faces cach�es.
+forme en L le tas empilé T avec l'ensemble des N cartes du jeu dans
+l'ordre des cartes et faces cachées.
 Donne leur valeur aux variables globales NbCartes et PremierRang.
 Pr�-condition : l'emplacement L est libre
-                N==52 ou N==32
+N==52 ou N==32
 **************************************************************** */
 void CreerJeuNeuf(int N, Localisation L, Tas *T) {
 }
 
-	/* Consultation des cartes d'un tas: ne deplace pas la carte */
+/* Consultation des cartes d'un tas: ne deplace pas la carte */
 
 /* *************************************************************
 Carte CarteSur(Tas T) {
@@ -140,7 +148,7 @@ Pr�condition : i <= LaHauteur(T)
 Carte IemeCarte(Tas T, int i) {
 }
 
-	/* Retournement d'une carte sur un tas */
+/* Retournement d'une carte sur un tas */
 
 /* *************************************************************
 void RetournerCarteSur(Tas *T)
@@ -158,7 +166,7 @@ Pr�-condition : T non vide
 void RetournerCarteSous(Tas *T) {
 }
 
-	/* Modification d'un tas */
+/* Modification d'un tas */
 
 /* *************************************************************
 void EmpilerTas(Tas *T)
@@ -194,7 +202,7 @@ retourne le tas T : la premiere devient la derniere et la visibilite est inverse
 void RetournerTas(Tas *T) {
 }
 
-	/* Deplacements de cartes d'un tas sur un autre */
+/* Deplacements de cartes d'un tas sur un autre */
 
 
 /* ******************************************************************************
@@ -254,12 +262,12 @@ void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2) {
 /* ******************************************************************************
 void PoserTasSurTas(Tas *T1, Tas *T2)
 pose le tas T1 sur le tas T2.
-Les deux tas doivent avoir le m�me mode d'�talement.
-A l'�tat final, le tas T1 est vide mais toujours actif, et le tas T2 comporte (de bas en
-haut) toutes les cartes qu'il avait au d�part puis toutes les cartes de T1 dans l'ordre
-qu'elles avaient au d�part dans chacun des tas.
-Cette op�ration ne modifie ni la visibilit� des cartes, ni la localisation des tas T1 et T2,
-ni leur mode d'�talement.
+Les deux tas doivent avoir le même mode d'étalement.
+A l'état final, le tas T1 est vide mais toujours actif, et le tas T2 comporte (de bas en
+haut) toutes les cartes qu'il avait au départ puis toutes les cartes de T1 dans l'ordre
+qu'elles avaient au départ dans chacun des tas.
+Cette opération ne modifie ni la visibilité des cartes, ni la localisation des tas T1 et T2,
+ni leur mode d'étalement.
 ********************************************************************************* */
 void PoserTasSurTas(Tas *T1, Tas *T2) {
 }
