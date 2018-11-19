@@ -2,8 +2,8 @@
 
 ### install the game
 
-git clone https://github.com/m2cci-TDP/Klondike.git__
-cd Klondike__
+git clone https://github.com/m2cci-TDP/Klondike.git <br />
+cd Klondike <br />
 make
 
 ### run
@@ -12,14 +12,14 @@ make
 
 ### work
 
-git clone https://github.com/m2cci-TDP/Klondike.git
-cd Klondike
+git clone https://github.com/m2cci-TDP/Klondike.git <br />
+cd Klondike <br />
 git checkout dev
 
 #### push a change
 
-git add *
-git commit -m "nom du commit"
+git add * <br />
+git commit -m "nom du commit" <br />
 git push origin dev
 
 #### pull changing
