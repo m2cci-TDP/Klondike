@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------*/
-/* Reussites. Michel Bonin, Catherine Parent, octobre 2005, 
-   d'apres les algorithmes de Pierre-Claude Scholl              
+/* Reussites. Michel Bonin, Catherine Parent, octobre 2005,
+   d'apres les algorithmes de Pierre-Claude Scholl
    modifie par F. Carrier, juillet 2012
    --> types enumeres : Couleur, Rang
    --> tas representes par des listes chainees
@@ -34,7 +34,7 @@ Rang RangSuivant(Rang R) {
 /* Representation des cartes */
 
 	/* Testeurs et selecteurs */
-	
+
 Rang LeRang(Carte C) {
 }
 
@@ -48,7 +48,7 @@ Visibilite EstDecouverte(Carte C) {
 }
 
 	/* Comparaison de cartes */
-	
+
 booleen RangInferieur(Carte C1, Carte C2) {
 }
 
@@ -65,9 +65,9 @@ booleen EstCarteAvant(Carte C1, Carte C2) {
 }
 
 /* Representation des tas */
-	
+
 	/* Testeurs et selecteurs */
-	
+
 booleen TasActif(Tas T) {
 }
 
@@ -87,11 +87,11 @@ Localisation LaPlace(Tas T) {
 }
 
 	/* Constructeurs */
-	
+
 /* *************************************************************
 void CreerTasVide(Localisation L, Mode M, Tas *T)
-associe à T un tas vide actif placé en L et de mode d'étalement M.
-Pré-condition : l'emplacement L est disponible
+associe ï¿½ T un tas vide actif placï¿½ en L et de mode d'ï¿½talement M.
+Prï¿½-condition : l'emplacement L est disponible
 **************************************************************** */
 void CreerTasVide(Localisation L, Mode M, Tas *T) {
 }
@@ -100,24 +100,24 @@ void CreerTasVide(Localisation L, Mode M, Tas *T) {
 void SupprimerTasVide(Tas *T)
 rend le tas vide inactif. En particulier, la place qu'il occupait
 devient libre pour un autre tas.
-Pré-condition : le tas T est vide et actif
+Prï¿½-condition : le tas T est vide et actif
 **************************************************************** */
 void SupprimerTasVide(Tas *T) {
 }
 
 /* *************************************************************
 void CreerJeuNeuf(int N, Localisation L, Tas *T)
-forme en L le tas empilé T avec l'ensemble des N cartes du jeu dans
-l'ordre des cartes et faces cachées.
+forme en L le tas empilï¿½ T avec l'ensemble des N cartes du jeu dans
+l'ordre des cartes et faces cachï¿½es.
 Donne leur valeur aux variables globales NbCartes et PremierRang.
-Pré-condition : l'emplacement L est libre
+Prï¿½-condition : l'emplacement L est libre
                 N==52 ou N==32
 **************************************************************** */
 void CreerJeuNeuf(int N, Localisation L, Tas *T) {
 }
 
 	/* Consultation des cartes d'un tas: ne deplace pas la carte */
-	
+
 /* *************************************************************
 Carte CarteSur(Tas T) {
 carte situee au dessus du tas
@@ -135,25 +135,25 @@ Carte CarteSous(Tas T) {
 /* *************************************************************
 Carte IemeCarte(Tas T, int i)
 ieme carte dans T (de bas en haut).
-Précondition : i <= LaHauteur(T)
+Prï¿½condition : i <= LaHauteur(T)
 **************************************************************** */
 Carte IemeCarte(Tas T, int i) {
 }
 
 	/* Retournement d'une carte sur un tas */
-	
+
 /* *************************************************************
 void RetournerCarteSur(Tas *T)
-retourne la carte située au dessus du tas T.
-Pré-condition : T non vide
+retourne la carte situï¿½e au dessus du tas T.
+Prï¿½-condition : T non vide
 **************************************************************** */
 void RetournerCarteSur(Tas *T) {
 }
 
 /* *************************************************************
 void RetournerCarteSous(Tas *T)
-retourne la carte située au dessous du tas T.
-Pré-condition : T non vide
+retourne la carte situï¿½e au dessous du tas T.
+Prï¿½-condition : T non vide
 **************************************************************** */
 void RetournerCarteSous(Tas *T) {
 }
@@ -171,7 +171,7 @@ void EmpilerTas(Tas *T) {
 void EtalerTas(Tas *T) {
 }
 
-	
+
 /* *************************************************************
 void EchangerCartes(int i, int j, Tas *T)
 echange les cartes i et j du tas T
@@ -213,40 +213,40 @@ void AjouterCarteSousTas (struct adCarte *ac, Tas *T) {
 
 /* ******************************************************************************
 void DeplacerHautSur(Tas *T1, Tas *T2)
-enlève la carte située au dessus de T1 et la place au dessus de T2
-Pré-condition : T1 n'est pas vide, T2 est actif.
+enlï¿½ve la carte situï¿½e au dessus de T1 et la place au dessus de T2
+Prï¿½-condition : T1 n'est pas vide, T2 est actif.
 ********************************************************************************* */
 void DeplacerHautSur(Tas *T1, Tas *T2) {
 }
 
 /* ******************************************************************************
 void DeplacerHautSous(Tas *T1, Tas *T2)
-enlève la carte située au dessus de T1 et la place au dessous de T2.
-Pré-condition : T1 n'est pas vide, T2 est actif.
+enlï¿½ve la carte situï¿½e au dessus de T1 et la place au dessous de T2.
+Prï¿½-condition : T1 n'est pas vide, T2 est actif.
 ********************************************************************************* */
 void DeplacerHautSous(Tas *T1, Tas *T2) {
 }
 
 /* ******************************************************************************
 void DeplacerBasSur(Tas *T1, Tas *T2)
-enlève la carte située au dessous de T1 et la place au dessus de T2.
-Pré-condition : T1 n'est pas vide, T2 est actif.
+enlï¿½ve la carte situï¿½e au dessous de T1 et la place au dessus de T2.
+Prï¿½-condition : T1 n'est pas vide, T2 est actif.
 ********************************************************************************* */
 void DeplacerBasSur(Tas *T1, Tas *T2) {
 }
 
 /* ******************************************************************************
 void DeplacerBasSous(Tas *T1, Tas *T2) {
-enlève la carte située au dessous de T1 et la place au dessous de T2.
-Pré-condition : T1 n'est pas vide, T2 est actif.
+enlï¿½ve la carte situï¿½e au dessous de T1 et la place au dessous de T2.
+Prï¿½-condition : T1 n'est pas vide, T2 est actif.
 ********************************************************************************* */
 void DeplacerBasSous(Tas *T1, Tas *T2) {
 }
 
 /* ******************************************************************************
 void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2)
-enlève du tas T1, la carte de couleur C et de rang R et la place au dessus de T2.
-Pré-condition : T1 contient la carte et T2 est actif.
+enlï¿½ve du tas T1, la carte de couleur C et de rang R et la place au dessus de T2.
+Prï¿½-condition : T1 contient la carte et T2 est actif.
 ********************************************************************************* */
 void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2) {
 }
@@ -254,14 +254,12 @@ void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2) {
 /* ******************************************************************************
 void PoserTasSurTas(Tas *T1, Tas *T2)
 pose le tas T1 sur le tas T2.
-Les deux tas doivent avoir le même mode d'étalement.
-A l'état final, le tas T1 est vide mais toujours actif, et le tas T2 comporte (de bas en
-haut) toutes les cartes qu'il avait au départ puis toutes les cartes de T1 dans l'ordre
-qu'elles avaient au départ dans chacun des tas.
-Cette opération ne modifie ni la visibilité des cartes, ni la localisation des tas T1 et T2,
-ni leur mode d'étalement.
+Les deux tas doivent avoir le mï¿½me mode d'ï¿½talement.
+A l'ï¿½tat final, le tas T1 est vide mais toujours actif, et le tas T2 comporte (de bas en
+haut) toutes les cartes qu'il avait au dï¿½part puis toutes les cartes de T1 dans l'ordre
+qu'elles avaient au dï¿½part dans chacun des tas.
+Cette opï¿½ration ne modifie ni la visibilitï¿½ des cartes, ni la localisation des tas T1 et T2,
+ni leur mode d'ï¿½talement.
 ********************************************************************************* */
 void PoserTasSurTas(Tas *T1, Tas *T2) {
 }
-
-

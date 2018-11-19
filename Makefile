@@ -6,10 +6,11 @@
 DIR = LIB_REUSSITES
 INCL = ${DIR}/include
 LIB = ${DIR}/lib
+SRC = ${DIR}/src
+
+all: lib ReussiteR7.e
 
 .c.o :
-	make -C LIB_REUSSITES/src
-	make install -C LIB_REUSSITES/src
 	gcc -Wall -g -ansi -no-pie -c -I${INCL} $<
 
 ReussiteR7.e: ${LIB}/libmachine_trace.a Alea.o Tas.o AfficherTas.o R7.o InteractionR7.o ReussiteR7.c
@@ -24,5 +25,10 @@ ReussiteQLL.e: ${LIB}/libmachine_trace.a Alea.o Tas.o AfficherTas.o QLL.o Intera
 Reussites.e: ${LIB}/libmachine_trace.a Alea.o Tas.o AfficherTas.o R7.o C4.o QLL.o InteractionToutes.o Reussites.c
 	gcc -no-pie -g -I${INCL} -o Reussites.e Reussites.c ${LIB}/graphlib_w.o InteractionToutes.o QLL.o C4.o R7.o Tas.o AfficherTas.o Alea.o -L${LIB} -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
 
+lib:
+	make -C ${SRC}
+	make install -C ${SRC}
+
 clean:
+	make -C ${SRC} clean
 	rm -f AfficherTas.o Alea.o InteractionR7.o R7.o *.e

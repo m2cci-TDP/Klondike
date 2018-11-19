@@ -1,10 +1,5 @@
 ## Klondike
 
-### depends X11R6
-See https://www.x.org/wiki/X11R6/
-go to https://www.x.org/releases/X11R6/
-Download xc-1.tar.gz, xc-2.tar.gz and xc-3.tar.gz
-
 ### install the game
 git clone https://github.com/m2cci-TDP/Klondike.git
 cd Klondike
