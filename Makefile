@@ -23,10 +23,10 @@ dirBIN = bin
 CC = gcc
 CFLAGS = -g -no-pie -I$(libINCL) -I$(dirINCL) -I$(dirInclR7) -Iimg
 LDFLAGS = -L$(libBIN) -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
-SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c $(dirSRC)/Tas.c
+SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c #$(dirSRC)/Tas.c
 srcR7 = $(dirSrcR7)/R7.c $(dirSrcR7)/InteractionR7.c
-#OBJ = $(dirBIN)/Tas.o $(patsubst %.c, %.o, $(SRC))
-OBJ = $(patsubst %.c, %.o, $(SRC))
+OBJ = $(dirBIN)/Tas.o $(patsubst %.c, %.o, $(SRC))
+#OBJ = $(patsubst %.c, %.o, $(SRC))
 objR7 = $(patsubst %.c, %.o, $(srcR7))
 
 all: lib ReussiteR7.e install
