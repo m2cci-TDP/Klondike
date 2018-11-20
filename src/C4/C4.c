@@ -98,6 +98,7 @@ void JouerTasC4(Tas *T, Couleur *Co)
 booleen reussirC4(ModeTrace MT)
 {
     Couleur Co = PremiereCouleur;
+    booleen Trouve = faux;
     int i = 0;
 
 
@@ -106,7 +107,7 @@ booleen reussirC4(ModeTrace MT)
         RetournerTas(&LigneC4[Co]);
         AfficherC4();
     }
-    while (CouleurSuivante(Co) != PremiereCouleur && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co)
+    while (LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == 8)))
     {
 
         if (i == LaHauteur(LigneC4[Co]))
@@ -123,9 +124,10 @@ booleen reussirC4(ModeTrace MT)
         {
             i++;
         }
+
     }
 
-    return (Co == PremiereCouleur) && (i == 0);
+    return (Co == DerniereCouleur) && (i == 8);
 }
 
 void JouerC4(ModeTrace MT)
