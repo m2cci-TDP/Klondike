@@ -28,7 +28,7 @@ int main(void)
   SaisirCommande (&Commande) ;
   while (Commande != FIN) {
     switch  (Commande) {
-    case SIMULRC4 :
+    case SIMULC4 :
       printf(TexteNbASimuler);
       scanf("%d",&nbparties);
       OuvrirGraphique("C4");
@@ -36,7 +36,7 @@ int main(void)
       FermerGraphique();
       break ;
 
-    case ANALYSERC4 :
+    case ANALYSEC4 :
       printf(TexteNbAAnalyser);
       scanf("%d",&nbparties);
       AnalyserC4(nbparties);

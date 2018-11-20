@@ -23,20 +23,20 @@ void SaisirLocTasC4()
 {
   int i;
 
-  LocTalonC4.NC = 1;//placer le talon dans la premiere case du tableau
+  LocTalonC4.NC = 1; /* placer le talon dans la premiere case du tableau */
   LocTalonC4.NL = 1;
 
   for (i=PremiereCouleur; i<=DerniereCouleur; i++)
   {
-    LocSeriesC4[i].NC = 2*i+2;//placer la série de 4 tas
+    LocSeriesC4[i].NC = 2*i+2; /* placer la série de 4 tas */
     LocSeriesC4[i].NL = 1;
   }
 }
 
-void CreerTableauInitialC4()//creer les le talon + les tas
+void CreerTableauInitialC4() /*creer les le talon + les tas*/
 {
   Couleur Co;
-  SaisirLocTasC4();//placer les 4 tas 
+  SaisirLocTasC4(); /*placer les 4 tas */
   
   /* Création du talon avec un jeu de 32 cartes*/
   CreerJeuNeuf(32, LocTalonC4, &TalonC4);
@@ -45,7 +45,7 @@ void CreerTableauInitialC4()//creer les le talon + les tas
 
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
-    CreerTasVide(LocSeriesC4[Co], etale, &(LigneC4[Co]));//creer des emplacements de tas vides
+    CreerTasVide(LocSeriesC4[Co], etale, &(LigneC4[Co])); /*creer des emplacements de tas vides*/
   }
 }
 
@@ -84,10 +84,10 @@ void AfficherC4()
 
 void JouerTasC4(Tas *T, Couleur *Co)
 {
-  RetournerCarteSur(*T);
+  RetournerCarteSur(T);
   *Co=LaCouleur(CarteSur(*T));  
-  DeplacerHautSous(T, &(LigneC4[*Co]));
-
+  DeplacerHautSous(T, &LigneC4[*Co]);
+  RetournerCarteSous(&LigneC4[*Co]);
 }
 
 booleen reussirC4(ModeTrace MT)
@@ -100,7 +100,7 @@ booleen reussirC4(ModeTrace MT)
 		RetournerTas(&LigneC4[Co]);
 		AfficherC4();
  	}
-	while (CouleurSuivante(Co) != PremiereCouleur && LaCouleur(IemeCarte(LigneC4[Co]), i) == Co) {
+	while (CouleurSuivante(Co) != PremiereCouleur && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co) {
 		
 		if (i == LaHauteur(LigneC4[Co]))
 		{
@@ -130,17 +130,24 @@ void JouerC4(ModeTrace MT)
   int i;
  
   for(Co=PremiereCouleur; Co<=DerniereCouleur; Co++){ 
-  	for(i=0;i<NbCartes/4;i++){//mettre 8 cartes dans chaque tas (distribution)
+  	for(i=0;i<NbCartes/4;i++){ /* mettre 8 cartes dans chaque tas (distribution) */
   		DeplacerHautSous(&TalonC4, &(LigneC4[Co]));
 	}
   }
-  if (MT == AvecTrace) AfficherC4();
+  if (MT == AvecTrace) {
+	AfficherC4();
+  }
   do {
     RetournerCarteSur(&LigneC4[Co2]);
-    if (MT == AvecTrace) AfficherC4();
-    JouerTasC4(&LigneC4[Co2], &Co);
-    if (MT == AvecTrace) AfficherC4();
-  } while (!EstDecouverte(CarteSur(LigneC4[Co2]));
+    if (MT == AvecTrace) {
+	AfficherC4();
+    }
+    JouerTasC4(&LigneC4[Co2], &Co); /* jouer le tas courant */
+    Co2 = Co;/* se placer dans le tas de destination */
+    if (MT == AvecTrace) {
+	AfficherC4();
+    }
+  } while (!EstDecouverte(CarteSur(LigneC4[Co2])));
 }
 
 void JouerUneC4(ModeTrace MT)

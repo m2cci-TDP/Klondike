@@ -10,8 +10,8 @@
 /* Définitions des constantes et des types */
 /*-----------------------------------------*/
 
-#ifndef TYPESCONST_H
-#define TYPESCONST_H
+#ifndef _TYPESCONST_H
+#define _TYPESCONST_H
 
 typedef int booleen;
 
@@ -94,8 +94,10 @@ typedef struct {
 
 /* Mode de Trace des Reussites */
 
-typed
-#endif	// TYPESCONST_H
+typedef enum {SansTrace, AvecTrace} ModeTrace;
 
-ef enum {SansTrace, AvecTrace} ModeTrace;
+#endif
+
+
+
 
