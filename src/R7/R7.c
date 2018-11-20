@@ -8,6 +8,7 @@ d'apres les algorithmes de Pierre-Claude Scholl              */
 #include <stdio.h>
 
 #include "R7.h"
+#include "stats.h"
 
 char TexteCouleurR7[5][8] = {"", "Trefle", "Carreau", "Coeur", "Pique"};
 
@@ -166,38 +167,50 @@ void JouerUneR7(int NMaxT, ModeTrace MT)
     JouerUnTourR7(MT);
     NumTourR7 = NumTourR7 + 1;
   }
-  if (TasVide(RebutR7))
+
+  if (!TasVide(RebutR7))
   {
-    printf("Vous avez gagné en %d tours !\n",NumTourR7);
-  }
-  else
-  {
-    printf("Vous avez perdu !\n");
+    NumTourR7 = 0;
   }
 }
 
 void ObserverR7(int NP, int NMaxT)
 {
-  int i;
+  int i = 0;
 
   CreerTableauInitialR7();
-  JouerUneR7(NMaxT, AvecTrace);
-  /*for (i = 1; i <= NP-1; i++)
+  while (i < NP)
   {
-    ReformerTableauInitialR7();
     JouerUneR7(NMaxT, AvecTrace);
-  }*/
+    if (NumTourR7 != 0)
+    {
+      printf("Vous avez gagné en %d tours !\n",NumTourR7);
+    }
+    else
+    {
+      printf("Vous avez perdu !\n");
+    }
+    ReformerTableauInitialR7();
+    i++;
+  }
+
+
 }
 
 void AnalyserR7(int NP, int NMaxT)
 {
-  int i;
+  int i = 0;
+  pStatsKlondike stats = initStats();
 
   CreerTableauInitialR7();
-  JouerUneR7(NMaxT, SansTrace);
-  for (i = 1; i <= NP-1; i++)
+  while (i < NP)
   {
-    ReformerTableauInitialR7();
     JouerUneR7(NMaxT, SansTrace);
+    addStats(&stats, NumTourR7);
+    ReformerTableauInitialR7();
+    i++;
   }
+
+  pctStats(stats);
+  freeStats(&stats);
 }

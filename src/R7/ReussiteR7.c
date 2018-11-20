@@ -18,11 +18,12 @@ d'apres les algorithmes de Pierre-Claude Scholl              */
 #define TexteBienvenue "Bienvenue \n"
 #define TexteNbASimuler "Choisissez le nombre de parties a simuler : "
 #define TexteNbAAnalyser "Choisissez le nombre de parties a analyser : "
+#define TexteNbPioche "Choisissez le nombre maximum de tour de pioche (défaut %d) : "
 #define TexteAuRevoir "Au revoir \n"
 
 int main(void)
 {
-  const int NBMAXT = 3;
+  int NBMAXT = 3;
 
   CodeCommande    Commande ;
   int nbparties ;
@@ -36,6 +37,8 @@ int main(void)
       case SIMULR7 :
         printf(TexteNbASimuler);
         scanf("%d",&nbparties);
+        printf(TexteNbPioche, NBMAXT);
+        scanf("%d", &NBMAXT);
         OuvrirGraphique("R7");
         ObserverR7(nbparties, NBMAXT);
         FermerGraphique();
@@ -44,6 +47,8 @@ int main(void)
       case ANALYSER7 :
         printf(TexteNbAAnalyser);
         scanf("%d",&nbparties);
+        printf(TexteNbPioche, NBMAXT);
+        scanf("%d", &NBMAXT);
         AnalyserR7(nbparties,NBMAXT);
         break;
 
