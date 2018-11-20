@@ -23,29 +23,29 @@ void SaisirLocTasC4()
 {
   int i;
 
-  LocTalonC4.NC = 1;//placer le talon dans la premiere case du tableau
+  LocTalonC4.NC = 1; /* placer le talon dans la premiere case du tableau */
   LocTalonC4.NL = 1;
 
   for (i=PremiereCouleur; i<=DerniereCouleur; i++)
   {
-    LocSeriesC4[i].NC = 2*i+2;//placer la série de 4 tas
+    LocSeriesC4[i].NC = 2*i+2; /* placer la série de 4 tas */
     LocSeriesC4[i].NL = 1;
   }
 }
 
-void CreerTableauInitialC4()//creer les le talon + les tas
+void CreerTableauInitialC4() /*creer les le talon + les tas*/
 {
   Couleur Co;
-  SaisirLocTasC4();//placer les 4 tas 
+  SaisirLocTasC4(); /*placer les 4 tas */
   
-  /* Cr�ation du talon avec un jeu de 32 cartes*/
+  /* Création du talon avec un jeu de 32 cartes*/
   CreerJeuNeuf(32, LocTalonC4, &TalonC4);
   BattreTas(&TalonC4);
-  /* Cr�ation des s�ries vides de chaque couleur  */
+  /* Création des séries vides de chaque couleur  */
 
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
-    CreerTasVide(LocSeriesC4[Co], etale, &(LigneC4[Co]));//creer des emplacements de tas vides
+    CreerTasVide(LocSeriesC4[Co], etale, &(LigneC4[Co])); /*creer des emplacements de tas vides*/
   }
 }
 
@@ -65,7 +65,7 @@ void ReformerTableauInitialC4()
   BattreTas(&TalonC4);
 }
 
-/* Visualisation des �tats du jeu */
+/* Visualisation des états du jeu */
 
 void AfficherC4()
 {
@@ -82,57 +82,81 @@ void AfficherC4()
 
 /* Jouer les 4 couleurs */
 
-void JouerTasC4(Tas *T)
+void JouerTasC4(Tas *T, Couleur *Co)
 {
-  Couleur Co;
-  RetournerCarteSur(*T);
-  Co=LaCouleur(CarteSur(*T));  
-  DeplacerHautSous(T, &(LigneC4[Co]));
+  RetournerCarteSur(T);
+  *Co=LaCouleur(CarteSur(*T));  
+  DeplacerHautSous(T, &LigneC4[*Co]);
+  RetournerCarteSous(&LigneC4[*Co]);
+}
 
+booleen reussirC4(ModeTrace MT)
+{
+	Couleur Co = PremiereCouleur;
+	int i = 0;
+	
+	
+	if (MT == AvecTrace) {
+		RetournerTas(&LigneC4[Co]);
+		AfficherC4();
+ 	}
+	while (CouleurSuivante(Co) != PremiereCouleur && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co) {
+		
+		if (i == LaHauteur(LigneC4[Co]))
+		{
+			i = 0;
+			Co = CouleurSuivante(Co);
+			if (MT == AvecTrace) {
+				RetournerTas(&LigneC4[Co]);
+				AfficherC4();
+  			}
+		}
+		else
+		{
+			i++;
+		}		
+	}
+
+	return Co == PremiereCouleur && i == 0;
 }
 
 void JouerC4(ModeTrace MT)
 {
-  if (MT == AvecTrace)
-  AfficherC4();
-  Couleur Co;int i;
+  if (MT == AvecTrace) {
+	AfficherC4();
+  }
+  Couleur Co2 = PremiereCouleur;
+  Couleur Co;
+  int i;
  
   for(Co=PremiereCouleur; Co<=DerniereCouleur; Co++){ 
-  for(i=0;i<=8;i++){//mettre 8 cartes dans chaque tas (distribution)
-  DeplacerHautSous(&TalonC4, &(LigneC4[Co]));}}
-  AfficherC4();
-  do
-    RetournerCarteSur(&TalonC4);
-    JouerTasC4(&TalonC4, &OK);
-    if (!OK)
-    DeplacerHautSur(&TalonC4, &RebutC4);
-    if (MT == AvecTrace)
-    AfficherC4();
-    while (OK && !TasVide(RebutC4))	{
-      /* On a jou� le talon ou le rebut. Le rebut n'est pas vide: on joue le rebut */
-      JouerTasC4(&RebutC4, &OK);
-      if (OK && (MT == AvecTrace))
-      AfficherC4();
-    }
+  	for(i=0;i<NbCartes/4;i++){ /* mettre 8 cartes dans chaque tas (distribution) */
+  		DeplacerHautSous(&TalonC4, &(LigneC4[Co]));
+	}
   }
-  while (!TasVide(TalonC4));
+  if (MT == AvecTrace) {
+	AfficherC4();
+  }
+  do {
+    RetournerCarteSur(&LigneC4[Co2]);
+    if (MT == AvecTrace) {
+	AfficherC4();
+    }
+    JouerTasC4(&LigneC4[Co2], &Co); /* jouer le tas courant */
+    Co2 = Co;/* se placer dans le tas de destination */
+    if (MT == AvecTrace) {
+	AfficherC4();
+    }
+  } while (!EstDecouverte(CarteSur(LigneC4[Co2])));
 }
 
 void JouerUneC4(ModeTrace MT)
 {
-  JouerUnTourC4(MT);
-  /* Jeu d'au plus NMaxT tours */
+  JouerC4(MT);
 
-  while (!(TasVide(RebutC4)) && (NumTourC4 < NMaxT))
+  if (reussirC4(MT))
   {
-    RetournerTas(&RebutC4);
-    PoserTasSurTas(&RebutC4, &TalonC4);
-    JouerUnTourC4(MT);
-    NumTourC4 = NumTourC4 + 1;
-  }
-  if (TasVide(RebutC4))
-  {
-    printf("Vous avez gagn� en %d tours !\n",NumTourC4);
+    printf("Vous avez gagné !\n");
   }
   else
   {
@@ -140,28 +164,28 @@ void JouerUneC4(ModeTrace MT)
   }
 }
 
-void ObserverC4(int NP, int NMaxT)
+void ObserverC4(int NP)
 {
   int i;
 
   CreerTableauInitialC4();
-  JouerUneC4(NMaxT, AvecTrace);
+  JouerUneC4(AvecTrace);
   for (i = 1; i <= NP-1; i++)
   {
     ReformerTableauInitialC4();
-    JouerUneC4(NMaxT, AvecTrace);
+    JouerUneC4(AvecTrace);
   }
 }
 
-void AnalyserC4(int NP, int NMaxT)
+void AnalyserC4(int NP)
 {
   int i;
 
   CreerTableauInitialC4();
-  JouerUneC4(NMaxT, SansTrace);
+  JouerUneC4(SansTrace);
   for (i = 1; i <= NP-1; i++)
   {
     ReformerTableauInitialC4();
-    JouerUneC4(NMaxT, SansTrace);
+    JouerUneC4(SansTrace);
   }
 }
