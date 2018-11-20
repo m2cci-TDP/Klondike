@@ -15,10 +15,10 @@ d'apres les algorithmes de Pierre-Claude Scholl              */
 *      PROGRAMME PRINCIPAL AVEC MENU D'INTERACTION
 * -------------------------------------------------------------------
 */
-#define         TexteBienvenue           "Bienvenue \n"
-#define         TexteNbASimuler          "Choisissez le nombre de parties a simuler : "
-#define         TexteNbAAnalyser         "Choisissez le nombre de parties a analyser : "
-#define         TexteAuRevoir            "Au revoir \n"
+#define TexteBienvenue "Bienvenue \n"
+#define TexteNbASimuler "Choisissez le nombre de parties a simuler : "
+#define TexteNbAAnalyser "Choisissez le nombre de parties a analyser : "
+#define TexteAuRevoir "Au revoir \n"
 
 int main(void)
 {

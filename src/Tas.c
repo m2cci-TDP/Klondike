@@ -16,16 +16,37 @@ modifie par F. Carrier, juillet 2012
 
 /* Couleurs et rangs */
 
-/* Couleurs */
-/* Ordre croissant sur les couleurs: trefle, carreau, coeur, pique */
-
+/* Couleurs
+Ordre croissant sur les couleurs: trefle, carreau, coeur, pique
+typedef enum {VideC, Trefle, Carreau, Coeur, Pique} Couleur;
+*/
 Couleur CouleurSuivante(Couleur C) {
+  Couleur c = C;
+  if (c < DerniereCouleur) {
+    c = (Couleur)((int)c + 1);
+  }
+  else {
+    c = PremiereCouleur;
+  }
+
+  return c;
 }
 
-/* Rangs */
-/* Ordre croissant sur les rangs: deux, ..., dix, valet, dame, roi, as */
-
+/* Rangs
+Ordre croissant sur les rangs: deux, ..., dix, valet, dame, roi, as
+typedef enum {VideR0, VideR1, Deux, Trois, Quatre, Cinq, Six, Sept, Huit, Neuf, Dix,
+Valet, Dame, Roi, As} Rang;
+*/
 Rang RangSuivant(Rang R) {
+  Rang r = R;
+  if (R < DernierRang) {
+    r = (Rang)((int)r + 1);
+  }
+  else {
+    r = PremierRang;
+  }
+
+  return r;
 }
 
 /*--------------------------------------------------------------------*/
@@ -36,33 +57,51 @@ Rang RangSuivant(Rang R) {
 
 /* Testeurs et selecteurs */
 
+/*
+typedef struct {
+Couleur CC;
+Rang RC;
+Visibilite VC;
+} ValeurCarte;
+typedef ValeurCarte Carte;
+*/
+
 Rang LeRang(Carte C) {
+  return C.RC;
 }
 
 Couleur LaCouleur(Carte C) {
+  return C.CC;
 }
 
 Visibilite EstCachee(Carte C) {
+  return C.VC == Cachee;
 }
 
 Visibilite EstDecouverte(Carte C) {
+  return C.VC == Decouverte;
 }
 
 /* Comparaison de cartes */
 
 booleen RangInferieur(Carte C1, Carte C2) {
+  return C1.RC < C2.RC;
 }
 
 booleen MemeRang(Carte C1, Carte C2) {
+  return C1.RC == C2.RC;
 }
 
 booleen CouleurInferieure(Carte C1, Carte C2) {
+  return C1.CC < C2.CC;
 }
 
 booleen MemeCouleur(Carte C1, Carte C2) {
+  return C1.CC == C2.CC;
 }
 
 booleen EstCarteAvant(Carte C1, Carte C2) {
+  return C1.RC == C2.RC - 1;
 }
 
 /* Representation des tas */
@@ -70,21 +109,33 @@ booleen EstCarteAvant(Carte C1, Carte C2) {
 /* Testeurs et selecteurs */
 
 booleen TasActif(Tas T) {
+  return T.RT == actif;
 }
 
 booleen TasVide(Tas T) {
+  return T.HT == 0;
 }
 
 booleen TasEmpile(Tas T) {
+  return T.MT == empile;
 }
 
 booleen TasEtale(Tas T) {
+  return T.MT == etale;
 }
 
 int LaHauteur(Tas T) {
+  return T.HT;
 }
 
 Localisation LaPlace(Tas T) {
+  /*
+  Localisation l;
+  l.NL = (T.LT).NL;
+  l.NC = (T.LT).NC;
+  return l;
+  */
+  return T.LT;
 }
 
 /* Constructeurs */
@@ -128,22 +179,23 @@ N==52 ou N==32
 void CreerJeuNeuf(int N, Localisation L, Tas *T) {
   pAdCarte newCarte = NULL;
   Couleur couleurCourante = PremiereCouleur;
-  Rang rangCourant = PremierRang;
+  Rang rangCourant;
 
-  if (N != 52 || N != 32) {
-    printf("A deck of cards must have 52 or 32 cards...");
+  if (N != 52 && N != 32) {
+    printf("A deck of cards must have 52 or 32 cards...\n");
     exit(1);
   } else {
     // initialisation de la variable globale PremierRang
     switch (N) {
       case 52:
-        PremierRang = Deux;
-        break;
+      PremierRang = Deux;
+      break;
       case 32:
-        PremierRang = Sept;
-        break;
+      PremierRang = Sept;
+      break;
     }
   }
+  rangCourant = PremierRang;
   T->LT = L;
   NbCartes = N; // init variable globale NbCartes
 
@@ -170,13 +222,10 @@ void CreerJeuNeuf(int N, Localisation L, Tas *T) {
       printf("Memory full...");
       exit(1);
     } else {
-      if (rangCourant < DernierRang) {
-        // même couleur, incrémentation du rang
-        rangCourant = (Rang)((int)rangCourant + 1);
-      } else {
+      rangCourant = RangSuivant(rangCourant);
+      if (rangCourant == PremierRang) {
         // changement de couleur
-        rangCourant = PremierRang;
-        couleurCourante = (Couleur)((int)couleurCourante + 1);
+        couleurCourante = CouleurSuivante(couleurCourante);
       }
 
       newCarte->elt.CC = couleurCourante;
@@ -210,7 +259,7 @@ Carte CarteSous(Tas T) {
 /* *************************************************************
 Carte IemeCarte(Tas T, int i)
 ieme carte dans T (de bas en haut).
-Pr�condition : i <= LaHauteur(T)
+Précondition : i <= LaHauteur(T)
 **************************************************************** */
 Carte IemeCarte(Tas T, int i) {
 }
@@ -220,15 +269,15 @@ Carte IemeCarte(Tas T, int i) {
 /* *************************************************************
 void RetournerCarteSur(Tas *T)
 retourne la carte situ�e au dessus du tas T.
-Pr�-condition : T non vide
+Pré-condition : T non vide
 **************************************************************** */
 void RetournerCarteSur(Tas *T) {
 }
 
 /* *************************************************************
 void RetournerCarteSous(Tas *T)
-retourne la carte situ�e au dessous du tas T.
-Pr�-condition : T non vide
+retourne la carte située au dessous du tas T.
+Pré-condition : T non vide
 **************************************************************** */
 void RetournerCarteSous(Tas *T) {
 }
@@ -260,6 +309,9 @@ void BattreTas(Tas *T)
 bas le tas T
 **************************************************************** */
 void BattreTas(Tas *T) {
+  InitAlea();
+
+
 }
 
 /* ******************************************************************************

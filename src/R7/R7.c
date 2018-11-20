@@ -46,12 +46,12 @@ void CreerTableauInitialR7()
   SaisirLocTasR7();
   NumTourR7 = 1;
 
-  /* Cr�ation du talon avec un jeu de 52 cartes et du rebut avec un tas vide */
+  /* Création du talon avec un jeu de 52 cartes et du rebut avec un tas vide */
   CreerJeuNeuf(52, LocTalonR7, &TalonR7);
   BattreTas(&TalonR7);
   CreerTasVide(LocRebutR7, empile, &RebutR7);
 
-  /* Cr�ation des s�ries de chaque couleur et initialisation avec le sept */
+  /* Création des séries de chaque couleur et initialisation avec le sept */
 
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
@@ -78,7 +78,7 @@ void ReformerTableauInitialR7()
 
   NumTourR7 = 1;
 
-  /* Initialisation des s�ries de chaque couleur avec le sept */
+  /* Initialisation des séries de chaque couleur avec le sept */
 
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
@@ -87,7 +87,7 @@ void ReformerTableauInitialR7()
   }
 }
 
-/* Visualisation des �tats du jeu */
+/* Visualisation des états du jeu */
 
 void AfficherR7()
 {
@@ -97,8 +97,9 @@ void AfficherR7()
   AfficherTas(TalonR7, "Talon");
   AfficherTas(RebutR7, "Rebut");
 
-  for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
-  AfficherTas(LigneR7[Co], TexteCouleurR7[Co]);
+  for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++) {
+    AfficherTas(LigneR7[Co], TexteCouleurR7[Co]);
+  }
 
   AttendreCliquer();
 }
@@ -116,37 +117,41 @@ void JouerTasR7(Tas *T, booleen *OK)
   RSur = LeRang(CarteSur(LigneR7[Co]));
 
   *OK = vrai;
-  if (RT == RangSuivant(RSur))
-  DeplacerHautSur(T, &(LigneR7[Co]));
-  else if (RSous == RangSuivant(RT))
-  DeplacerHautSous(T, &(LigneR7[Co]));
-  else
-  *OK = faux;
+  if (RT == RangSuivant(RSur)) {
+    DeplacerHautSur(T, &(LigneR7[Co]));
+  } else if (RSous == RangSuivant(RT)) {
+    DeplacerHautSous(T, &(LigneR7[Co]));
+  } else {
+    *OK = faux;
+  }
 }
 
 void JouerUnTourR7(ModeTrace MT)
 {
   booleen OK;
 
-  if (MT == AvecTrace)
-  AfficherR7();
-  do	/* Jeu du talon, puis �ventuellement du rebut */ {
+  if (MT == AvecTrace) {
+    AfficherR7();
+  }
+  do { /* Jeu du talon, puis éventuellement du rebut */
     /* On sait qu'on ne peut pas jouer le rebut et que le talon n'est pas vide */
     /* Jouer le talon */
     RetournerCarteSur(&TalonR7);
     JouerTasR7(&TalonR7, &OK);
-    if (!OK)
-    DeplacerHautSur(&TalonR7, &RebutR7);
-    if (MT == AvecTrace)
-    AfficherR7();
-    while (OK && !TasVide(RebutR7))	{
-      /* On a jou� le talon ou le rebut. Le rebut n'est pas vide: on joue le rebut */
-      JouerTasR7(&RebutR7, &OK);
-      if (OK && (MT == AvecTrace))
+    if (!OK) {
+      DeplacerHautSur(&TalonR7, &RebutR7);
+    }
+    if (MT == AvecTrace) {
       AfficherR7();
     }
-  }
-  while (!TasVide(TalonR7));
+    while (OK && !TasVide(RebutR7))	{
+      /* On a joué le talon ou le rebut. Le rebut n'est pas vide: on joue le rebut */
+      JouerTasR7(&RebutR7, &OK);
+      if (OK && (MT == AvecTrace)) {
+        AfficherR7();
+      }
+    }
+  } while (!TasVide(TalonR7));
 }
 
 void JouerUneR7(int NMaxT, ModeTrace MT)
@@ -163,7 +168,7 @@ void JouerUneR7(int NMaxT, ModeTrace MT)
   }
   if (TasVide(RebutR7))
   {
-    printf("Vous avez gagn� en %d tours !\n",NumTourR7);
+    printf("Vous avez gagné en %d tours !\n",NumTourR7);
   }
   else
   {
@@ -177,11 +182,11 @@ void ObserverR7(int NP, int NMaxT)
 
   CreerTableauInitialR7();
   JouerUneR7(NMaxT, AvecTrace);
-  for (i = 1; i <= NP-1; i++)
+  /*for (i = 1; i <= NP-1; i++)
   {
     ReformerTableauInitialR7();
     JouerUneR7(NMaxT, AvecTrace);
-  }
+  }*/
 }
 
 void AnalyserR7(int NP, int NMaxT)
