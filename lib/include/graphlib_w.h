@@ -10,8 +10,8 @@
 /* Remise a plat et simplification...                                */
 /*********************************************************************/
 
-#ifndef GRAPHLIB_W2_H
-#define GRAPHLIB_W2_H
+#ifndef _GRAPHLIB_W2_H
+#define _GRAPHLIB_W2_H
 
 #include <X11/Xlib.h>
 
@@ -308,13 +308,13 @@ char consilent(Fenetre f);
 
 char consilent_dans(Fenetre *f);
 
-/**********************************************************************/	
+/**********************************************************************/
 /* bouton fournit le numero de bouton si un bouton de la souris a ete */
 /* enfonce, 0 sinon                                                   */
 
 int bouton(Fenetre f);
 
-/**********************************************************************/	
+/**********************************************************************/
 /* bouton_dans fournit le numero de bouton si un bouton de la souris  */
 /* a ete enfonce, 0 sinon                                             */
 

@@ -1,9 +1,9 @@
 /*--------------------------------------------------------------*/
-/* Reussites. Michel Bonin, Catherine Parent, octobre 2005, 
+/* Reussites. Michel Bonin, Catherine Parent, octobre 2005,
    d'apres les algorithmes de Pierre-Claude Scholl              */
 /*--------------------------------------------------------------*/
 
-/* Générateur aléatoire */
+/* GÃ©nÃ©rateur alÃ©atoire */
 
 #include <stdlib.h>
 #include <time.h>
@@ -19,9 +19,7 @@ void InitAlea()
 
 int UnEntier(int n)
 {
-  /* tirage aléatoire d'un entier entre 1 et n */
-  
+  /* tirage alÃ©atoire d'un entier entre 1 et n */
+
   return rand()%n + 1;
 }
-
-
