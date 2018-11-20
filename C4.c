@@ -38,10 +38,10 @@ void CreerTableauInitialC4()//creer les le talon + les tas
   Couleur Co;
   SaisirLocTasC4();//placer les 4 tas 
   
-  /* Cr�ation du talon avec un jeu de 32 cartes*/
+  /* Création du talon avec un jeu de 32 cartes*/
   CreerJeuNeuf(32, LocTalonC4, &TalonC4);
   BattreTas(&TalonC4);
-  /* Cr�ation des s�ries vides de chaque couleur  */
+  /* Création des séries vides de chaque couleur  */
 
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
@@ -65,7 +65,7 @@ void ReformerTableauInitialC4()
   BattreTas(&TalonC4);
 }
 
-/* Visualisation des �tats du jeu */
+/* Visualisation des états du jeu */
 
 void AfficherC4()
 {
@@ -157,28 +157,28 @@ void JouerUneC4(ModeTrace MT)
   }
 }
 
-void ObserverC4(int NP, int NMaxT)
+void ObserverC4(int NP)
 {
   int i;
 
   CreerTableauInitialC4();
-  JouerUneC4(NMaxT, AvecTrace);
+  JouerUneC4(AvecTrace);
   for (i = 1; i <= NP-1; i++)
   {
     ReformerTableauInitialC4();
-    JouerUneC4(NMaxT, AvecTrace);
+    JouerUneC4(AvecTrace);
   }
 }
 
-void AnalyserC4(int NP, int NMaxT)
+void AnalyserC4(int NP)
 {
   int i;
 
   CreerTableauInitialC4();
-  JouerUneC4(NMaxT, SansTrace);
+  JouerUneC4(SansTrace);
   for (i = 1; i <= NP-1; i++)
   {
     ReformerTableauInitialC4();
-    JouerUneC4(NMaxT, SansTrace);
+    JouerUneC4(SansTrace);
   }
 }
