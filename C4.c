@@ -82,57 +82,74 @@ void AfficherC4()
 
 /* Jouer les 4 couleurs */
 
-void JouerTasC4(Tas *T)
+void JouerTasC4(Tas *T, Couleur *Co)
 {
-  Couleur Co;
   RetournerCarteSur(*T);
-  Co=LaCouleur(CarteSur(*T));  
-  DeplacerHautSous(T, &(LigneC4[Co]));
+  *Co=LaCouleur(CarteSur(*T));  
+  DeplacerHautSous(T, &(LigneC4[*Co]));
 
+}
+
+booleen reussirC4(ModeTrace MT)
+{
+	Couleur Co = PremiereCouleur;
+	int i = 0;
+	
+	
+	if (MT == AvecTrace) {
+		RetournerTas(&LigneC4[Co]);
+		AfficherC4();
+ 	}
+	while (CouleurSuivante(Co) != PremiereCouleur && LaCouleur(IemeCarte(LigneC4[Co]), i) == Co) {
+		
+		if (i == LaHauteur(LigneC4[Co]))
+		{
+			i = 0;
+			Co = CouleurSuivante(Co);
+			if (MT == AvecTrace) {
+				RetournerTas(&LigneC4[Co]);
+				AfficherC4();
+  			}
+		}
+		else
+		{
+			i++;
+		}		
+	}
+
+	return Co == PremiereCouleur && i == 0;
 }
 
 void JouerC4(ModeTrace MT)
 {
-  if (MT == AvecTrace)
-  AfficherC4();
-  Couleur Co;int i;
+  if (MT == AvecTrace) {
+	AfficherC4();
+  }
+  Couleur Co2 = PremiereCouleur;
+  Couleur Co;
+  int i;
  
   for(Co=PremiereCouleur; Co<=DerniereCouleur; Co++){ 
-  for(i=0;i<=8;i++){//mettre 8 cartes dans chaque tas (distribution)
-  DeplacerHautSous(&TalonC4, &(LigneC4[Co]));}}
-  AfficherC4();
-  do
-    RetournerCarteSur(&TalonC4);
-    JouerTasC4(&TalonC4, &OK);
-    if (!OK)
-    DeplacerHautSur(&TalonC4, &RebutC4);
-    if (MT == AvecTrace)
-    AfficherC4();
-    while (OK && !TasVide(RebutC4))	{
-      /* On a jou� le talon ou le rebut. Le rebut n'est pas vide: on joue le rebut */
-      JouerTasC4(&RebutC4, &OK);
-      if (OK && (MT == AvecTrace))
-      AfficherC4();
-    }
+  	for(i=0;i<NbCartes/4;i++){//mettre 8 cartes dans chaque tas (distribution)
+  		DeplacerHautSous(&TalonC4, &(LigneC4[Co]));
+	}
   }
-  while (!TasVide(TalonC4));
+  if (MT == AvecTrace) AfficherC4();
+  do {
+    RetournerCarteSur(&LigneC4[Co2]);
+    if (MT == AvecTrace) AfficherC4();
+    JouerTasC4(&LigneC4[Co2], &Co);
+    if (MT == AvecTrace) AfficherC4();
+  } while (!EstDecouverte(CarteSur(LigneC4[Co2]));
 }
 
 void JouerUneC4(ModeTrace MT)
 {
-  JouerUnTourC4(MT);
-  /* Jeu d'au plus NMaxT tours */
+  JouerC4(MT);
 
-  while (!(TasVide(RebutC4)) && (NumTourC4 < NMaxT))
+  if (reussirC4(MT))
   {
-    RetournerTas(&RebutC4);
-    PoserTasSurTas(&RebutC4, &TalonC4);
-    JouerUnTourC4(MT);
-    NumTourC4 = NumTourC4 + 1;
-  }
-  if (TasVide(RebutC4))
-  {
-    printf("Vous avez gagn� en %d tours !\n",NumTourC4);
+    printf("Vous avez gagné !\n");
   }
   else
   {
