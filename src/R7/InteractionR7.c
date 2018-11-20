@@ -5,36 +5,9 @@ d'apres les algorithmes de Pierre-Claude Scholl              */
 
 #include <stdio.h>
 #include <ctype.h>
+#include "InteractionR7.h"
 
 /* Interaction avec l'utilisateur */
-
-/* ----------------------------------------------------------
-* CONSTANTES
-* ----------------------------------------------------------
-*/
-
-#define         NbMaxEssais              5
-#define         Invite                   "Votre Choix (? pour liste des commandes) : "
-#define         TexteSimulationR7        '1'
-#define         TexteAnalyseR7           '2'
-#define         TexteFin                 'F'
-#define         TexteAide                '?'
-
-/* -------------------------------------------------------------------
-* CodeCommande   : le type [SIMULR7, ANALYSER7, FIN]
-* -------------------------------------------------------------------
-*/
-
-typedef enum {SIMULR7, ANALYSER7, FIN}     CodeCommande ;
-
-/* -------------------------------------------------------------------
-*      INTERACTION
-*
-*      EstTexteCommande : un caract�re ---> un bool�en
-*      EcrireMenu       : une action
-*      SaisirCommande   : une action (le r�sultat : un CodeCommande)
-* -------------------------------------------------------------------
-*/
 
 void LireCar(char	*c)
 {
@@ -45,11 +18,7 @@ void LireCar(char	*c)
 
 int EstTexteCommande (char c)
 {
-	return {
-		(c == TexteSimulationR7) ||
-		(c == TexteAnalyseR7) ||
-		(c == TexteFin)
-	};
+	return (c == TexteSimulationR7) || (c == TexteAnalyseR7) || (c == TexteFin);
 }
 
 void EcrireMenu ()

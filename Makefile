@@ -1,5 +1,5 @@
 # définition des cibles particulières
-.PHONY: clean, mrproper
+.PHONY: clean, mrproper, install, lib
 
 # désactivation des règles implicites
 .SUFFIXES:
@@ -7,40 +7,54 @@
 
 # définition des variables
 #DIR = /home/theo/Documents/M2CCI/Klondike/LIB_REUSSITES/
-DIR = LIB_REUSSITES
-INCL = ${DIR}/include
-LIB = ${DIR}/lib
-SRC = ${DIR}/src
+libDIR = lib
+libINCL = $(libDIR)/include
+libBIN = $(libDIR)/bin
+#libSRC = $(libDIR)/src
+
+dirSRC = src
+dirSrcR7 = $(dirSRC)/R7
+dirSrcC4 = $(dirSRC)/C4
+dirSrcQLL = $(dirSRC)/QLL
+dirINCL = include
+dirInclR7 = $(dirINCL)/R7
+dirBIN = bin
 
 CC = gcc
-CFLAGS = -g -no-pie -I${INCL}
-LDFLAGS = -L${LIB} -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
-OBJ = Tas.o AfficherTas.o Alea.o
+CFLAGS = -g -no-pie -I$(libINCL) -I$(dirINCL) -I$(dirInclR7) -Iimg
+LDFLAGS = -L$(libBIN) -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
+SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c
+srcR7 = $(dirSrcR7)/R7.c $(dirSrcR7)/InteractionR7.c
+OBJ = $(dirBIN)/Tas.o $(patsubst %.c, %.o, $(SRC))
+objR7 = $(patsubst %.c, %.o, $(srcR7))
 
-all: lib ReussiteR7.e
+all: lib ReussiteR7.e install
 
-.c.o :
-	gcc $(CFLAGS) -Wall -ansi -c $<
+$(dirBIN)/%.o: %.c
+	$(CC) $(CFLAGS) -Wall -ansi -c $<
 
-ReussiteR7.e: ${LIB}/libmachine_trace.a $(OBJ) R7.o InteractionR7.o ReussiteR7.c
-	gcc $(CFLAGS) -o ReussiteR7.e ReussiteR7.c ${LIB}/graphlib_w.o InteractionR7.o R7.o $(OBJ) $(LDFLAGS)
+ReussiteR7.e: $(libBIN)/libmachine_trace.a $(OBJ) $(objR7) $(dirSrcR7)/ReussiteR7.c
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-ReussiteC4.e: ${LIB}/libmachine_trace.a $(OBJ) C4.o InteractionC4.o ReussiteC4.c
-	gcc $(CFLAGS) -o ReussiteC4.e ReussiteC4.c ${LIB}/graphlib_w.o InteractionC4.o C4.o $(OBJ) $(LDFLAGS)
+ReussiteC4.e: $(libBIN)/libmachine_trace.a $(OBJ) C4.o InteractionC4.o $(dirSrcC4)/ReussiteC4.c
+	$(CC) $(CFLAGS) -o ReussiteC4.e $(dirSrcC4)/ReussiteC4.c ${libBIN}/graphlib_w.o InteractionC4.o C4.o $(OBJ) $(LDFLAGS)
 
-ReussiteQLL.e: ${LIB}/libmachine_trace.a $(OBJ) QLL.o InteractionQLL.o ReussiteQLL.c
-	gcc $(CFLAGS) -o ReussiteQLL.e ReussiteQLL.c ${LIB}/graphlib_w.o InteractionQLL.o QLL.o $(OBJ) $(LDFLAGS)
+ReussiteQLL.e: $(libBIN)/libmachine_tra	ce.a $(OBJ) QLL.o InteractionQLL.o $(dirSrcQLL)/ReussiteQLL.c
+	$(CC) $(CFLAGS) -o ReussiteQLL.e $(dirSrcQLL)/ReussiteQLL.c ${libBIN}/graphlib_w.o InteractionQLL.o QLL.o $(OBJ) $(LDFLAGS)
 
-Reussites.e: ${LIB}/libmachine_trace.a $(OBJ) R7.o C4.o QLL.o InteractionToutes.o Reussites.c
-	gcc $(CFLAGS) -o Reussites.e Reussites.c ${LIB}/graphlib_w.o InteractionToutes.o QLL.o C4.o R7.o $(OBJ) $(LDFLAGS)
+Reussites.e: $(libBIN)/libmachine_trace.a $(OBJ) R7.o C4.o QLL.o InteractionToutes.o $(dirSRC)/Reussites.c
+	$(CC) $(CFLAGS) -o Reussites.e $(dirSRC)/Reussites.c ${libBIN}/graphlib_w.o InteractionToutes.o QLL.o C4.o R7.o $(OBJ) $(LDFLAGS)
 
 lib:
-	make -C ${SRC}
-	make install -C ${SRC}
+	make -C $(libDIR)
+
+install:
+	mkdir -p $(dirBIN)
+	mv $(OBJ) $(objR7) ${dirBIN}/
 
 clean:
-	make -C ${SRC} clean
-	rm -f AfficherTas.o Alea.o InteractionR7.o R7.o
+	make -C $(libDIR) clean
+	rm -f $(dirBIN)/AfficherTas.o $(dirBIN)/Alea.o $(dirBIN)/InteractionR7.o $(dirBIN)/R7.o
 
 mrproper:
 	rm -rf *.e
