@@ -17,7 +17,7 @@ Tas TalonC4;
 Localisation LocSeriesC4[DerniereCouleur+1];
 Localisation LocTalonC4;
 
-/* Formation du tableau de jeu initial */
+/* Formation ducolor tableau de jeu initial */
 
 void SaisirLocTasC4()
 {
@@ -54,14 +54,22 @@ void ReformerTableauInitialC4()
   Couleur Co;
 
   /* On reforme le talon, en empilant les cartes de la ligne */
-
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
+    /*
     EmpilerTas(&(LigneC4[Co]));
     PoserTasSurTas(&(LigneC4[Co]), &TalonC4);
     EtalerTas(&(LigneC4[Co]));
+    */
+    /* fix bug de retournement */
+    while (LaHauteur(LigneC4[Co]) != 0) {
+      if (EstDecouverte(CarteSur(LigneC4[Co]))) {
+        RetournerCarteSur(&LigneC4[Co]);
+      }
+      DeplacerHautSur(&LigneC4[Co], &TalonC4);
+    }
   }
-  RetournerTas(&TalonC4);
+  /* RetournerTas(&TalonC4); */
   BattreTas(&TalonC4);
 }
 
@@ -92,7 +100,7 @@ for (i==LaHauteur(LigneC4[Co])-1;)
 void JouerTasC4(Tas *T, Couleur *Co)
 {
   RetournerCarteSur(T);
-  *Co=LaCouleur(CarteSur(*T));
+  *Co = LaCouleur(CarteSur(*T));
   DeplacerHautSous(T, &LigneC4[*Co]);
   RetournerCarteSous(&LigneC4[*Co]);
 }
@@ -108,7 +116,7 @@ booleen reussirC4(ModeTrace MT)
     RetournerTas(&LigneC4[Co]);
     AfficherC4();
   }
-  while (LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == 8)))
+  while (LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
   {
 
     if (i == LaHauteur(LigneC4[Co]))
@@ -125,7 +133,6 @@ booleen reussirC4(ModeTrace MT)
     {
       i++;
     }
-
   }
 
   return (Co == DerniereCouleur) && (i == NbCartes/4);
@@ -141,9 +148,9 @@ void JouerC4(ModeTrace MT)
   Couleur Co;
   int i;
 
-  for(Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
+  for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
-    for(i=0; i<NbCartes/4; i++) /* mettre 8 cartes dans chaque tas (distribution) */
+    for (i=0; i<NbCartes/4; i++) /* mettre 8 cartes dans chaque tas (distribution) */
     {
       DeplacerHautSous(&TalonC4, &(LigneC4[Co]));
     }
