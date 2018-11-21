@@ -74,17 +74,20 @@ void ReformerTableauInitialC4()
 }
 
 /* Visualisation des états du jeu */
-
+/* fix bug retournement lors du test de la réussite */
 void RetournerSiPasRetourner(Tas *T){
-    int i;
-    for(i=1;i<=LaHauteur(*T);i++){
-        if( EstCachee(IemeCarte(*T, i))){
-          EchangerCartes(i, 1, T);
-          RetournerCarteSur(T);
-        }
-    }
-
+  int i = 0;
+  while (EstCachee(CarteSur(*T))) {
+    RetournerCarteSur(T);
+    EchangerCartes(LaHauteur(*T), 1, T);
+    i++;
   }
+  while (i > 0) {
+    EchangerCartes(1, LaHauteur(*T), T);
+    i--;
+  }
+}
+
 void AfficherC4()
 {
   Couleur Co;
@@ -123,11 +126,9 @@ booleen reussirC4(ModeTrace MT)
   if (MT == AvecTrace)
   {
     RetournerSiPasRetourner(&LigneC4[Co]);
-    AfficherC4();
   }
   while (LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
   {
-
     if (i == LaHauteur(LigneC4[Co]))
     {
       i = 0;
@@ -135,7 +136,6 @@ booleen reussirC4(ModeTrace MT)
       if (MT == AvecTrace)
       {
         RetournerSiPasRetourner(&LigneC4[Co]);
-
       }
     }
     else
@@ -143,7 +143,7 @@ booleen reussirC4(ModeTrace MT)
       i++;
     }
   }
-  if (MT==AvecTrace) {
+  if (MT == AvecTrace) {
     AfficherC4();
   }
 
