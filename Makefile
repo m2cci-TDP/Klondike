@@ -54,7 +54,7 @@ lib:
 
 install:
 	mkdir -p $(dirBIN)
-	mv $(OBJ) $(objR7) ${dirBIN}/
+	mv $(OBJ) $(objR7) $(objC4) ${dirBIN}/
 
 clean:
 	make -C $(libDIR) clean

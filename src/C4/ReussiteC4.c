@@ -41,6 +41,9 @@ int main(void)
         scanf("%d",&nbparties);
         AnalyserC4(nbparties);
         break;
+
+      default:
+        break;
     }
     SaisirCommande (&Commande) ;
 
