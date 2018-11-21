@@ -73,17 +73,30 @@ void ReformerTableauInitialC4()
   BattreTas(&TalonC4);
 }
 
+/* fix bug DeplacerBasSur(T, T)
+A corriger dans Tas.c */
+void DeplacerBasSurC4(Tas *T1, Tas *T2)
+{
+  T2->queue->suiv = T1->tete;
+  T1->tete->prec = T2->queue;
+  T1->tete = T1->tete->suiv;
+  T1->tete->prec = NULL;
+  T2->queue = T2->queue->suiv;
+  T2->queue->suiv = NULL;
+}
+
+
 /* Visualisation des états du jeu */
 /* fix bug retournement lors du test de la réussite */
 void RetournerSiPasRetourner(Tas *T){
   int i = 0;
   while (EstCachee(CarteSur(*T))) {
     RetournerCarteSur(T);
-    EchangerCartes(LaHauteur(*T), 1, T);
+    DeplacerHautSous(T, T);
     i++;
   }
   while (i > 0) {
-    EchangerCartes(1, LaHauteur(*T), T);
+    DeplacerBasSurC4(T, T);
     i--;
   }
 }
