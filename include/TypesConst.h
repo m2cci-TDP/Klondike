@@ -20,9 +20,6 @@ typedef enum {R7, C4} codeGame;
 /* Définitions des constantes et des types */
 /*-----------------------------------------*/
 
-#ifndef _TYPESCONST_H
-#define _TYPESCONST_H
-
 typedef int booleen;
 
 #define vrai 1
@@ -106,10 +103,5 @@ typedef struct {
 /* Mode de Trace des Reussites */
 
 typedef enum {SansTrace, AvecTrace} ModeTrace;
-
-#endif
-
-
-
 
 #endif

@@ -24,11 +24,10 @@ dirBIN = bin
 CC = gcc
 CFLAGS = -g -no-pie -I$(libINCL) -I$(dirINCL) -I$(dirInclR7) -I$(dirInclC4) -Iimg
 LDFLAGS = -L$(libBIN) -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
-SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c $(dirSRC)/stats.c $(dirSRC)/Interaction.c #$(dirSRC)/Tas.c
+SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c $(dirSRC)/Interaction.c $(dirSRC)/stats.c $(dirSRC)/Tas.c
 srcR7 = $(dirSrcR7)/R7.c
 srcC4 = $(dirSrcC4)/C4.c
-OBJ = $(dirBIN)/Tas.o $(patsubst %.c, %.o, $(SRC))
-#OBJ = $(patsubst %.c, %.o, $(SRC))
+OBJ = $(patsubst %.c, %.o, $(SRC))
 objR7 = $(patsubst %.c, %.o, $(srcR7))
 objC4 = $(patsubst %.c, %.o, $(srcC4))
 
@@ -64,7 +63,7 @@ clean:
 	make -C tests clean
 	make -C $(dirSRC) clean
 	make -C $(libDIR) clean
-	rm -f $(dirBIN)/AfficherTas.o $(dirBIN)/Alea.o $(dirBIN)/Interaction.o $(dirBIN)/C4.o $(dirBIN)/R7.o $(dirBIN)/stats.o
+	rm -f $(dirBIN)/*.o
 
 mrproper:
 	rm -rf *.e

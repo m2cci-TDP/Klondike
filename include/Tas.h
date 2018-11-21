@@ -100,11 +100,13 @@ void BattreTas(Tas *T);
 
 void RetournerTas(Tas *T);
 
+void setVisibleCards(Tas *T);
+
 	/* Deplacements de cartes d'un tas sur un autre */
 
-void AjouterCarteSurTas (struct adCarte *ac, Tas *T);
+void AjouterCarteSurTas (pAdCarte ac, Tas *T);
 
-void AjouterCarteSousTas (struct adCarte *ac, Tas *T);
+void AjouterCarteSousTas (pAdCarte ac, Tas *T);
 
 void DeplacerHautSur(Tas *T1, Tas *T2);
 

@@ -73,34 +73,6 @@ void ReformerTableauInitialC4()
   BattreTas(&TalonC4);
 }
 
-/* fix bug DeplacerBasSur(T, T)
-A corriger dans Tas.c */
-void DeplacerBasSurC4(Tas *T1, Tas *T2)
-{
-  T2->queue->suiv = T1->tete;
-  T1->tete->prec = T2->queue;
-  T1->tete = T1->tete->suiv;
-  T1->tete->prec = NULL;
-  T2->queue = T2->queue->suiv;
-  T2->queue->suiv = NULL;
-}
-
-
-/* Visualisation des états du jeu */
-/* fix bug retournement lors du test de la réussite */
-void RetournerSiPasRetourner(Tas *T){
-  int i = 0;
-  while (EstCachee(CarteSur(*T))) {
-    RetournerCarteSur(T);
-    DeplacerHautSous(T, T);
-    i++;
-  }
-  while (i > 0) {
-    DeplacerBasSurC4(T, T);
-    i--;
-  }
-}
-
 void AfficherC4()
 {
   Couleur Co;
@@ -137,7 +109,7 @@ booleen reussirC4(ModeTrace MT)
 
   if (MT == AvecTrace)
   {
-    RetournerSiPasRetourner(&LigneC4[Co]);
+    setVisibleCards(&LigneC4[Co]);
   }
   while (LaHauteur(LigneC4[Co]) == NbCartes/4 && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
   {
@@ -147,7 +119,7 @@ booleen reussirC4(ModeTrace MT)
       Co = CouleurSuivante(Co);
       if (MT == AvecTrace)
       {
-        RetournerSiPasRetourner(&LigneC4[Co]);
+        setVisibleCards(&LigneC4[Co]);
       }
     }
     else
