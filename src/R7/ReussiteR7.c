@@ -8,7 +8,7 @@ d'apres les algorithmes de Pierre-Claude Scholl              */
 /* Programme principal */
 
 #include "R7.h"
-#include "InteractionR7.h"
+#include "Interaction.h"
 #include "Alea.h"
 
 /* -------------------------------------------------------------------
@@ -25,7 +25,7 @@ int main(void)
 {
   int NBMAXT = 3;
 
-  CodeCommande    Commande ;
+  CodeCommande Commande ;
   int nbparties ;
 
   InitAlea();
@@ -34,7 +34,7 @@ int main(void)
   SaisirCommande (&Commande) ;
   while (Commande != FIN) {
     switch  (Commande) {
-      case SIMULR7 :
+      case SIMUL :
         printf(TexteNbASimuler);
         scanf("%d",&nbparties);
         printf(TexteNbPioche, NBMAXT);
@@ -44,7 +44,7 @@ int main(void)
         FermerGraphique();
         break ;
 
-      case ANALYSER7 :
+      case ANALYSE :
         printf(TexteNbAAnalyser);
         scanf("%d",&nbparties);
         printf(TexteNbPioche, NBMAXT);

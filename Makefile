@@ -24,15 +24,15 @@ dirBIN = bin
 CC = gcc
 CFLAGS = -g -no-pie -I$(libINCL) -I$(dirINCL) -I$(dirInclR7) -I$(dirInclC4) -Iimg
 LDFLAGS = -L$(libBIN) -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
-SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c $(dirSRC)/stats.c #$(dirSRC)/Tas.c
-srcR7 = $(dirSrcR7)/R7.c $(dirSrcR7)/InteractionR7.c
-srcC4 = $(dirSrcC4)/C4.c $(dirSrcC4)/InteractionC4.c
+SRC = $(dirSRC)/AfficherTas.c $(dirSRC)/Alea.c $(dirSRC)/stats.c $(dirSRC)/Interaction.c #$(dirSRC)/Tas.c
+srcR7 = $(dirSrcR7)/R7.c
+srcC4 = $(dirSrcC4)/C4.c
 OBJ = $(dirBIN)/Tas.o $(patsubst %.c, %.o, $(SRC))
 #OBJ = $(patsubst %.c, %.o, $(SRC))
 objR7 = $(patsubst %.c, %.o, $(srcR7))
 objC4 = $(patsubst %.c, %.o, $(srcC4))
 
-all: lib ReussiteR7.e ReussiteC4.e install
+all: lib ReussiteR7.e ReussiteC4.e Reussites.e install
 
 $(dirBIN)/%.o: %.c
 	$(CC) $(CFLAGS) -Wall -ansi -c $<
@@ -46,8 +46,8 @@ ReussiteC4.e: $(libBIN)/libmachine_trace.a $(OBJ) $(objC4) $(dirSrcC4)/ReussiteC
 #ReussiteQLL.e: $(libBIN)/libmachine_tra	ce.a $(OBJ) QLL.o InteractionQLL.o $(dirSrcQLL)/ReussiteQLL.c
 #	$(CC) $(CFLAGS) -o ReussiteQLL.e $(dirSrcQLL)/ReussiteQLL.c ${libBIN}/graphlib_w.o InteractionQLL.o QLL.o $(OBJ) $(LDFLAGS)
 #
-#Reussites.e: $(libBIN)/libmachine_trace.a $(OBJ) R7.o C4.o QLL.o InteractionToutes.o $(dirSRC)/Reussites.c
-#	$(CC) $(CFLAGS) -o Reussites.e $(dirSRC)/Reussites.c ${libBIN}/graphlib_w.o InteractionToutes.o QLL.o C4.o R7.o $(OBJ) $(LDFLAGS)
+Reussites.e: $(libBIN)/libmachine_trace.a $(OBJ) $(objR7) $(objC4) $(dirSRC)/mainReussite.c
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 lib:
 	make -C $(libDIR)

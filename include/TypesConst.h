@@ -9,6 +9,13 @@
 #ifndef _TYPES_CONST_H
 #define _TYPES_CONST_H
 
+/* -------------------------------------------------------------------
+* CodeCommande   : le type [SIMULR7, ANALYSER7, FIN]
+* -------------------------------------------------------------------
+*/
+typedef enum {SIMUL, ANALYSE, FIN} CodeCommande ;
+typedef enum {R7, C4} codeGame;
+
 /*-----------------------------------------*/
 /* Définitions des constantes et des types */
 /*-----------------------------------------*/

@@ -5,7 +5,7 @@ d'apres les algorithmes de Pierre-Claude Scholl              */
 
 #include <stdio.h>
 #include <ctype.h>
-#include "InteractionR7.h"
+#include "Interaction.h"
 
 /* Interaction avec l'utilisateur */
 
@@ -18,14 +18,14 @@ void LireCar(char	*c)
 
 int EstTexteCommande (char c)
 {
-	return (c == TexteSimulationR7) || (c == TexteAnalyseR7) || (c == TexteFin);
+	return (c == TexteSimulation) || (c == TexteAnalyse) || (c == TexteFin);
 }
 
 void EcrireMenu ()
 {
 	printf ("Tapez \n") ;
-	printf ("%c pour Simulation graphique de la reussite R7, \n",TexteSimulationR7) ;
-	printf (" %c pour Analyse d une serie de reussites R7 (sans affichage graphique), \n",TexteAnalyseR7);
+	printf (" %c pour Simulation graphique de la reussite, \n",TexteSimulation) ;
+	printf (" %c pour Analyse d une serie de reussites (sans affichage graphique), \n",TexteAnalyse);
 	printf (" %c pour Fin, \n",TexteFin);
 	printf (" %c pour Aide.\n",TexteAide);
 }
@@ -35,7 +35,8 @@ void SaisirCommande (CodeCommande *CC)
 	char C  ;
 	int NbEssais ;
 
-	printf (Invite) ; LireCar (&C) ;
+	printf (Invite) ;
+	LireCar (&C) ;
 	NbEssais = 0 ;
 	while ((NbEssais < NbMaxEssais) && (! EstTexteCommande (C)))
 	{
@@ -55,15 +56,16 @@ void SaisirCommande (CodeCommande *CC)
 			}
 		}
 	}
-	if (NbEssais == NbMaxEssais)
-	*CC = FIN  ;
+	if (NbEssais == NbMaxEssais) {
+		*CC = FIN  ;
+	}
 	else switch (C)
 	{
-		case TexteSimulationR7 :
-			*CC = SIMULR7 ;
+		case TexteSimulation :
+			*CC = SIMUL ;
 			break ;
-		case TexteAnalyseR7 :
-			*CC = ANALYSER7 ;
+		case TexteAnalyse :
+			*CC = ANALYSE ;
 			break ;
 		case TexteFin :
 			*CC = FIN ;

@@ -11,8 +11,10 @@
  * -------------------------------------------------------------------
 */
 
-#ifndef _INTERACTION_R7_H
-#define _INTERACTION_R7_H
+#ifndef _INTERACTION_H
+#define _INTERACTION_H
+
+#include "TypesConst.h"
 
 /* ----------------------------------------------------------
 * CONSTANTES
@@ -20,16 +22,10 @@
 */
 #define NbMaxEssais 5
 #define Invite "Votre Choix (? pour liste des commandes) : "
-#define TexteSimulationR7 '1'
-#define TexteAnalyseR7 '2'
+#define TexteSimulation '1'
+#define TexteAnalyse '2'
 #define TexteFin 'F'
 #define TexteAide '?'
-
-/* -------------------------------------------------------------------
-* CodeCommande   : le type [SIMULR7, ANALYSER7, FIN]
-* -------------------------------------------------------------------
-*/
-typedef enum {SIMULR7, ANALYSER7, FIN}     CodeCommande ;
 
 /* -------------------------------------------------------------------
 *      INTERACTION
