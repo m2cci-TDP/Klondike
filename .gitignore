@@ -3,6 +3,7 @@
 
 # Object files
 *.o
+!Tas.o
 *.ko
 *.obj
 *.elf

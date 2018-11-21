@@ -1,7 +1,10 @@
 /*--------------------------------------------------------------*/
-/* Reussites. Michel Bonin, Catherine Parent, octobre 2005, 
+/* Reussites. Michel Bonin, Catherine Parent, octobre 2005,
    d'apres les algorithmes de Pierre-Claude Scholl              */
 /*--------------------------------------------------------------*/
+
+#ifndef _TAS_H
+#define _TAS_H
 
 #include "TypesConst.h"
 
@@ -24,9 +27,9 @@ Rang RangSuivant(Rang R);
 /*--------------------------------------------------------------------*/
 
 /* Representation des cartes */
-	
+
 	/* Testeurs et selecteurs */
-	
+
 Rang LeRang(Carte C);
 
 Couleur LaCouleur(Carte C);
@@ -36,7 +39,7 @@ Visibilite EstCachee(Carte C);
 Visibilite EstDecouverte(Carte C);
 
 	/* Comparaison de cartes */
-	
+
 booleen RangInferieur(Carte C1, Carte C2);
 
 booleen MemeRang(Carte C1, Carte C2);
@@ -48,9 +51,9 @@ booleen MemeCouleur(Carte C1, Carte C2);
 booleen EstCarteAvant(Carte C1, Carte C2);
 
 /* Representation des tas */
-	
+
 	/* Testeurs et selecteurs */
-	
+
 booleen TasActif(Tas T);
 
 booleen TasVide(Tas T);
@@ -64,7 +67,7 @@ int LaHauteur(Tas T);
 Localisation LaPlace(Tas T);
 
 	/* Constructeurs */
-	
+
 void CreerTasVide(Localisation L, Mode M, Tas *T);
 
 void SupprimerTasVide(Tas *T);
@@ -72,7 +75,7 @@ void SupprimerTasVide(Tas *T);
 void CreerJeuNeuf(int N, Localisation L, Tas *T);
 
 	/* Consultation des cartes d'un tas: ne deplace pas la carte */
-	
+
 Carte CarteSur(Tas T);
 
 Carte CarteSous(Tas T);
@@ -80,13 +83,13 @@ Carte CarteSous(Tas T);
 Carte IemeCarte(Tas T, int i);
 
 	/* Retournement d'une carte sur un tas */
-	
+
 void RetournerCarteSur(Tas *T);
 
 void RetournerCarteSous(Tas *T);
 
 	/* Modification d'un tas */
-	
+
 void EmpilerTas(Tas *T);
 
 void EtalerTas(Tas *T);
@@ -98,7 +101,7 @@ void BattreTas(Tas *T);
 void RetournerTas(Tas *T);
 
 	/* Deplacements de cartes d'un tas sur un autre */
-	
+
 void AjouterCarteSurTas (struct adCarte *ac, Tas *T);
 
 void AjouterCarteSousTas (struct adCarte *ac, Tas *T);
@@ -115,3 +118,4 @@ void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2);
 
 void PoserTasSurTas(Tas *T1, Tas *T2);
 
+#endif
