@@ -1,5 +1,5 @@
 # définition des cibles particulières
-.PHONY: clean, mrproper, install, lib
+.PHONY: clean, mrproper, install, lib, check
 
 # désactivation des règles implicites
 .SUFFIXES:
@@ -56,7 +56,13 @@ install:
 	mkdir -p $(dirBIN)
 	mv $(OBJ) $(objR7) $(objC4) ${dirBIN}/
 
+check:
+	make -C tests check.e
+	tests/check.e
+
 clean:
+	make -C tests clean
+	make -C $(dirSRC) clean
 	make -C $(libDIR) clean
 	rm -f $(dirBIN)/AfficherTas.o $(dirBIN)/Alea.o $(dirBIN)/InteractionR7.o $(dirBIN)/R7.o
 
