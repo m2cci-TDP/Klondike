@@ -1,5 +1,5 @@
 # définition des cibles particulières
-.PHONY: clean, mrproper, install, lib, check
+# .PHONY:
 
 # désactivation des règles implicites
 .SUFFIXES:
@@ -49,8 +49,8 @@ ReussiteC4.e: $(libBIN)/libmachine_trace.a $(OBJ) $(objC4) $(dirSrcC4)/ReussiteC
 Reussites.e: $(libBIN)/libmachine_trace.a $(OBJ) $(objR7) $(objC4) $(dirSRC)/mainReussite.c
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-lib:
-	make -C $(libDIR)
+libraries:
+	make -C $(libDIR)/
 
 install:
 	mkdir -p $(dirBIN)
@@ -64,7 +64,7 @@ clean:
 	make -C tests clean
 	make -C $(dirSRC) clean
 	make -C $(libDIR) clean
-	rm -f $(dirBIN)/AfficherTas.o $(dirBIN)/Alea.o $(dirBIN)/InteractionR7.o $(dirBIN)/R7.o
+	rm -f $(dirBIN)/AfficherTas.o $(dirBIN)/Alea.o $(dirBIN)/Interaction.o $(dirBIN)/C4.o $(dirBIN)/R7.o $(dirBIN)/stats.o
 
 mrproper:
 	rm -rf *.e
