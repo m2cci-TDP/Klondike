@@ -75,7 +75,16 @@ void ReformerTableauInitialC4()
 
 /* Visualisation des états du jeu */
 
+void RetournerSiPasRetourner(Tas *T){
+    int i;
+    for(i=1;i<=LaHauteur(*T);i++){
+        if( EstCachee(IemeCarte(*T, i))){
+          EchangerCartes(i, 1, T);
+          RetournerCarteSur(T);
+        }
+    }
 
+  }
 void AfficherC4()
 {
   Couleur Co;
@@ -113,7 +122,7 @@ booleen reussirC4(ModeTrace MT)
 
   if (MT == AvecTrace)
   {
-    RetournerTas(&LigneC4[Co]);
+    RetournerSiPasRetourner(&LigneC4[Co]);
     AfficherC4();
   }
   while (LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
@@ -125,14 +134,17 @@ booleen reussirC4(ModeTrace MT)
       Co = CouleurSuivante(Co);
       if (MT == AvecTrace)
       {
-        RetournerTas(&LigneC4[Co]);
-        AfficherC4();
+        RetournerSiPasRetourner(&LigneC4[Co]);
+
       }
     }
     else
     {
       i++;
     }
+  }
+  if (MT==AvecTrace) {
+    AfficherC4();
   }
 
   return (Co == DerniereCouleur) && (i == NbCartes/4);
