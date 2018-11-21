@@ -32,7 +32,7 @@ OBJ = $(dirBIN)/Tas.o $(patsubst %.c, %.o, $(SRC))
 objR7 = $(patsubst %.c, %.o, $(srcR7))
 objC4 = $(patsubst %.c, %.o, $(srcC4))
 
-all: lib ReussiteR7.e ReussiteC4.e Reussites.e install
+all: libraries ReussiteR7.e ReussiteC4.e Reussites.e install
 
 $(dirBIN)/%.o: %.c
 	$(CC) $(CFLAGS) -Wall -ansi -c $<
