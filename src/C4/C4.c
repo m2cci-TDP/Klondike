@@ -136,13 +136,14 @@ booleen reussirC4(ModeTrace MT)
 
 void JouerC4(ModeTrace MT)
 {
+  Couleur Co2 = PremiereCouleur;
+  Couleur Co;
+  int i;
+
   if (MT == AvecTrace)
   {
     AfficherC4();
   }
-  Couleur Co2 = PremiereCouleur;
-  Couleur Co;
-  int i;
 
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
@@ -151,10 +152,12 @@ void JouerC4(ModeTrace MT)
       DeplacerHautSous(&TalonC4, &(LigneC4[Co]));
     }
   }
+
   if (MT == AvecTrace)
   {
     AfficherC4();
   }
+
   do
   {
     RetournerCarteSur(&LigneC4[Co2]);
@@ -168,7 +171,7 @@ void JouerC4(ModeTrace MT)
     {
       AfficherC4();
     }
-  } while (!EstDecouverte(CarteSur(LigneC4[Co2])));
+  } while (EstCachee(CarteSur(LigneC4[Co2])));
 }
 
 booleen JouerUneC4(ModeTrace MT)
@@ -204,8 +207,7 @@ void AnalyserC4(int NP)
 
   CreerTableauInitialC4();
   while (i < NP) {
-    printf("%d\n", JouerUneC4(SansTrace));
-    //addStats(&stats, JouerUneC4(SansTrace));
+    addStats(&stats, JouerUneC4(SansTrace));
     ReformerTableauInitialC4();
     i++;
   }
