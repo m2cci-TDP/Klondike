@@ -568,6 +568,10 @@ Cette opération ne modifie ni la visibilité des cartes, ni la localisation des
 ni leur mode d'étalement.
 ********************************************************************************* */
 void PoserTasSurTas(Tas *T1, Tas *T2) {
+  if (TasEtale(*T1) != TasEtale(*T2)) {
+    printf("Decks must have the same spreading mode.");
+    exit(1);
+  }
   /* connection des tas */
   if (TasVide(*T2)) {
     T2->tete = T1->tete;

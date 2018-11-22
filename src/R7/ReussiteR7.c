@@ -56,7 +56,7 @@ int main(void)
         break;
     }
     SaisirCommande (&Commande) ;
-
+    NBMAXT = 3;
   }
   printf (TexteAuRevoir) ;
 }
