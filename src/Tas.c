@@ -363,13 +363,14 @@ void BattreTas(Tas *T)
 bas le tas T
 **************************************************************** */
 void BattreTas(Tas *T) {
-  InitAlea();
-  int i = 1, nbAlea;
+  /* InitAlea(); // déjà fait dans le main */
+  int i = 1, nbAleaA, nbAleaB;
 
-  while (i <= NbCartes)
+  while (i <= NB_BAT)
   {
-    nbAlea = UnEntier(NbCartes);
-    EchangerCartes(i, nbAlea, T);
+    nbAleaA = UnEntier(NbCartes);
+    nbAleaB = UnEntier(NbCartes);
+    EchangerCartes(nbAleaA, nbAleaB, T);
     i++;
   }
 }

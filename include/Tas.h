@@ -8,6 +8,8 @@
 
 #include "TypesConst.h"
 
+#define NB_BAT 1000
+
 /*-----------------------------------*/
 /* Specifications des objets de base */
 /*-----------------------------------*/

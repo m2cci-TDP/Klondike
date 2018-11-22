@@ -139,7 +139,9 @@ void findRestart(pRestart *head, int nbRestart)
 
 void printNbRestart(pRestart head, int nbWin)
 {
-  pRestart currentCell = head->next;
+  pRestart currentCell = NULL;
+  sort(&head);
+  currentCell = head->next;
   while (currentCell != head)
   {
     printf("\t%d (%d%%) parties gagnées en %d tours\n", currentCell->number, 100*currentCell->number/nbWin, currentCell->nbForWin);
@@ -158,4 +160,41 @@ void freeRestart(pRestart *head)
     free(currentCell);
   }
   free(*head);
+}
+
+void sort(pRestart *head)
+{
+  pRestart prevCell=NULL, currentCell=NULL, prevCellTmp=NULL, currentCellTmp=NULL;
+
+  if (*head != NULL && (*head)->next != NULL)
+  {
+    /* pour ne pas déplacer la cellule fictive */
+    prevCell = (*head)->next;
+    currentCell = prevCell->next;
+
+    while (currentCell != *head)
+    {
+      if (currentCell->nbForWin >= prevCell->nbForWin) /* on continue, nothing append */
+      {
+        prevCell = currentCell;
+        currentCell = currentCell->next;
+      }
+      else /* entre la tête et currentCell */
+      {
+        /* point d'insertion */
+        prevCellTmp = *head;
+        currentCellTmp = prevCellTmp->next;
+        while (currentCell->nbForWin > currentCellTmp->nbForWin)
+        {
+          prevCellTmp = currentCellTmp;
+          currentCellTmp = currentCellTmp->next;
+        }
+        /* mise à jour des liens */
+        prevCell->next = currentCell->next;
+        prevCellTmp->next = currentCell;
+        currentCell->next = currentCellTmp;
+        currentCell = prevCell->next;
+      }
+    }
+  }
 }

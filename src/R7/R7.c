@@ -206,7 +206,6 @@ void AnalyserR7(int NP, int NMaxT)
   while (i < NP)
   {
     JouerUneR7(NMaxT, SansTrace);
-    printf("%d\n", NumTourR7);
     addStats(&stats, NumTourR7);
     ReformerTableauInitialR7();
     i++;

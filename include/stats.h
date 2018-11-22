@@ -49,5 +49,7 @@ void findRestart(pRestart*, int);
 void printNbRestart(pRestart, int);
 /* destructeur Restart */
 void freeRestart(pRestart*);
+/* trie de la liste Restart */
+void sort(pRestart *head);
 
 #endif
