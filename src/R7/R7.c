@@ -160,7 +160,7 @@ void JouerUneR7(int NMaxT, ModeTrace MT)
   JouerUnTourR7(MT);
   /* Jeu d'au plus NMaxT tours */
 
-  while (!(TasVide(RebutR7)) && (NumTourR7 < NMaxT))
+  while (!TasVide(RebutR7) && NumTourR7 < NMaxT)
   {
     RetournerTas(&RebutR7);
     PoserTasSurTas(&RebutR7, &TalonR7);
@@ -206,6 +206,7 @@ void AnalyserR7(int NP, int NMaxT)
   while (i < NP)
   {
     JouerUneR7(NMaxT, SansTrace);
+    printf("%d\n", NumTourR7);
     addStats(&stats, NumTourR7);
     ReformerTableauInitialR7();
     i++;

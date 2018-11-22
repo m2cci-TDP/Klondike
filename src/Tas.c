@@ -379,18 +379,23 @@ void RetournerTas(Tas *T)
 retourne le tas T : la premiere devient la derniere et la visibilite est inversee
 ********************************************************************************* */
 void RetournerTas(Tas *T) {
-  int i = 0;
-  pAdCarte tmpHead = T->tete;
+  int i = 1;
+  pAdCarte oldTail = NULL, head = NULL;
 
   /* retournement des cartes */
-  while (i < NbCartes)
+  while (i <= LaHauteur(*T))
   {
     RetournerCarteSous(T);
+    DeplacerBasSur(T, T);
     i++;
   }
   /* retournement du tas */
-  T->tete = T->queue;
-  T->queue = tmpHead;
+  oldTail = T->queue;
+  while (oldTail != T->tete) {
+    head = T->tete;
+    SupprimerCarteSous(T);
+    AjouterCarteApres(head, oldTail, T);
+  }
 }
 
 /* fix bug retournement lors du test de la réussite
@@ -537,7 +542,7 @@ Pré-condition : T1 contient la carte et T2 est actif.
 void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2) {
   pAdCarte adC = T1->tete;
 
-  while (adC != NULL && LaCouleur(adC->elt) != C && LeRang(adC->elt) != R)
+  while (adC != NULL && (LaCouleur(adC->elt) != C || LeRang(adC->elt) != R))
   {
     adC = adC->suiv;
   }
@@ -564,9 +569,15 @@ ni leur mode d'étalement.
 ********************************************************************************* */
 void PoserTasSurTas(Tas *T1, Tas *T2) {
   /* connection des tas */
-  T2->queue->suiv = T1->tete;
-  T1->tete->prec = T2->queue;
-  T2->queue = T1->queue;
+  if (TasVide(*T2)) {
+    T2->tete = T1->tete;
+    T2->queue = T1->queue;
+  } else {
+    T2->queue->suiv = T1->tete;
+    T1->tete->prec = T2->queue;
+    T2->queue = T1->queue;
+  }
+
   /* vidange de T1 */
   T1->tete = NULL;
   T1->queue = NULL;

@@ -207,7 +207,8 @@ void AnalyserC4(int NP)
 
   CreerTableauInitialC4();
   while (i < NP) {
-    addStats(&stats, JouerUneC4(SansTrace));
+    printf("%d\n", JouerUneC4(SansTrace));
+    //addStats(&stats, JouerUneC4(SansTrace));
     ReformerTableauInitialC4();
     i++;
   }
