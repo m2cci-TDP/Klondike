@@ -109,7 +109,7 @@ booleen reussirC4(ModeTrace MT)
 
   if (MT == AvecTrace)
   {
-    setVisibleCards(&LigneC4[Co]);
+    DecouvrirCartesTas(&LigneC4[Co]);
   }
   while (LaHauteur(LigneC4[Co]) == NbCartes/4 && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
   {
@@ -119,7 +119,7 @@ booleen reussirC4(ModeTrace MT)
       Co = CouleurSuivante(Co);
       if (MT == AvecTrace)
       {
-        setVisibleCards(&LigneC4[Co]);
+        DecouvrirCartesTas(&LigneC4[Co]);
       }
     }
     else
@@ -204,7 +204,8 @@ void AnalyserC4(int NP)
 
   CreerTableauInitialC4();
   while (i < NP) {
-    addStats(&stats, JouerUneC4(SansTrace));
+    printf("%d\n", JouerUneC4(SansTrace));
+    //addStats(&stats, JouerUneC4(SansTrace));
     ReformerTableauInitialC4();
     i++;
   }

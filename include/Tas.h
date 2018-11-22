@@ -100,8 +100,6 @@ void BattreTas(Tas *T);
 
 void RetournerTas(Tas *T);
 
-void setVisibleCards(Tas *T);
-
 	/* Deplacements de cartes d'un tas sur un autre */
 
 void AjouterCarteSurTas (pAdCarte ac, Tas *T);
@@ -119,5 +117,14 @@ void DeplacerBasSous(Tas *T1, Tas *T2);
 void DeplacerCarteSur(Couleur C, Rang R, Tas *T1, Tas *T2);
 
 void PoserTasSurTas(Tas *T1, Tas *T2);
+
+/* fonctions additionnelles */
+void SupprimerCarte(pAdCarte, Tas*);
+void SupprimerCarteSous (Tas*);
+void SupprimerCarteSur (Tas*);
+void DecouvrirCartesTas(Tas*);
+void AjouterCarteSurTasVide (pAdCarte, Tas*);
+pAdCarte pIemeCarte(Tas, int);
+void AjouterCarteApres (pAdCarte, pAdCarte, Tas*);
 
 #endif
