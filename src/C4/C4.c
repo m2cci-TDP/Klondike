@@ -223,8 +223,11 @@ void runReussiteC4()
   int nbparties ;
 
   printf (TexteBienvenue, "C4") ;
-  SaisirCommande (&Commande) ;
-  while (Commande != FIN) {
+
+  do
+  {
+    SaisirCommande (&Commande) ;
+
     switch  (Commande) {
       case SIMUL :
         printf(TexteNbASimuler);
@@ -243,8 +246,6 @@ void runReussiteC4()
       default:
         break;
     }
-    SaisirCommande (&Commande) ;
-
-  }
+  } while (Commande != FIN);
   printf (TexteAuRevoir) ;
 }

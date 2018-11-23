@@ -22,11 +22,25 @@ int EstTexteCommande (char c)
 	return (c == TexteSimulation) || (c == TexteAnalyse) || (c == TexteFin);
 }
 
+int isGame(char c)
+{
+	return (c == TexteR7) || (c == TexteC4) || (c == TexteFin);
+}
+
 void EcrireMenu ()
 {
 	printf ("\nAide :\n") ;
 	printf (" %c pour un simulation graphique de la reussite, \n",TexteSimulation) ;
 	printf (" %c pour une analyse d'une serie de reussites (sans affichage graphique), \n",TexteAnalyse);
+	printf (" %c pour Fin, \n",TexteFin);
+	printf (" %c pour Aide.\n",TexteAide);
+}
+
+void printGame(void)
+{
+	printf ("\nAide :\n") ;
+	printf (" %c pour jouer la réussite R7, \n", TexteR7) ;
+	printf (" %c pour jouer la réussite C4, \n", TexteC4);
 	printf (" %c pour Fin, \n",TexteFin);
 	printf (" %c pour Aide.\n",TexteAide);
 }
@@ -64,6 +78,41 @@ void SaisirCommande (CodeCommande *CC)
 			break;
 		}
 	} while (!EstTexteCommande (C));
+}
+
+void chooseGame (codeGame *cG)
+{
+	char C  ;
+
+	do
+	{
+		printf (Invite) ;
+		LireCar (&C) ;
+
+		switch (C)
+		{
+			case TexteAide:
+			printGame ()  ;
+			break;
+
+			case TexteR7 :
+			*cG = R7 ;
+			break ;
+
+			case TexteC4 :
+			*cG = C4 ;
+			break ;
+
+			case TexteFin :
+			*cG = FIN ;
+			break ;
+
+			default:
+			printf ("Commande incorrecte.\n");
+			printf("Essayez %c.\n", TexteAide);
+			break;
+		}
+	} while (!isGame (C));
 }
 
 void defaultScanf (int *value, int defaultValue)

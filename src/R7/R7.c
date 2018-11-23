@@ -223,8 +223,11 @@ void runReussiteR7()
   int nbparties ;
 
   printf (TexteBienvenue, "R7") ;
-  SaisirCommande (&Commande) ;
-  while (Commande != FIN) {
+
+  do
+  {
+    SaisirCommande (&Commande) ;
+
     switch  (Commande) {
       case SIMUL :
         printf(TexteNbASimuler);
@@ -248,8 +251,8 @@ void runReussiteR7()
       default:
         break;
     }
-    SaisirCommande (&Commande) ;
+
     NBMAXT = 3;
-  }
+  } while (Commande != FIN);
   printf (TexteAuRevoir) ;
 }

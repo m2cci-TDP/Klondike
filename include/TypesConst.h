@@ -14,7 +14,6 @@
 * -------------------------------------------------------------------
 */
 typedef enum {SIMUL, ANALYSE, FIN} CodeCommande ;
-typedef enum {R7, C4} codeGame;
 
 /*-----------------------------------------*/
 /* Définitions des constantes et des types */

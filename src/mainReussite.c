@@ -13,26 +13,29 @@
 
 int main(void)
 {
-  int game;
+  codeGame cG;
 
   InitAlea();
 
-  printf ("\t\tBienvenue dans le jeu des reussites !\n\n") ;
+  printf ("\n\n\t\tKLONDIKE\n\n") ;
 
-  printf("Choisissez une réussite entre 1 pour R7 et 2 pour C4 : ");
-  scanf("%d",&game);
-  printf("\n");
-
-  switch (game)
+  do
   {
-    case 1:
+    chooseGame(&cG);
+
+    switch (cG) {
+      case R7:
       runReussiteR7();
       break;
 
-    case 2:
+      case C4:
       runReussiteC4();
       break;
-    }
 
-    return 0;
+      default:
+      break;
+    }
+  } while (cG != FIN);
+
+  return 0;
 }
