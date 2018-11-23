@@ -378,17 +378,19 @@ void EchangerCartes(int i, int j, Tas *T) {
 /* *************************************************************
 void BattreTas(Tas *T)
 bas le tas T
+based on the Fisher-Yates algorithm (1938)
+https://fr.wikipedia.org/wiki/M%C3%A9lange_de_Fisher-Yates
 **************************************************************** */
 void BattreTas(Tas *T) {
   /* InitAlea(); // déjà fait dans le main */
-  int i = 1, nbAleaA, nbAleaB;
+  int i = LaHauteur(*T) - 1, nbAlea;
 
-  while (i <= NB_BAT)
+  while (i > 0)
   {
-    nbAleaA = UnEntier(NbCartes);
-    nbAleaB = UnEntier(NbCartes);
-    EchangerCartes(nbAleaA, nbAleaB, T);
-    i++;
+    nbAlea = UnEntier(i);
+    EchangerCartes(nbAlea, i, T);
+
+    i--;
   }
 }
 
