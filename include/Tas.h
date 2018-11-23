@@ -76,6 +76,8 @@ void SupprimerTasVide(Tas *T);
 
 void CreerJeuNeuf(int N, Localisation L, Tas *T);
 
+void LibererTasPlein(Tas*);
+
 	/* Consultation des cartes d'un tas: ne deplace pas la carte */
 
 Carte CarteSur(Tas T);

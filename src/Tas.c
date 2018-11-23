@@ -218,6 +218,23 @@ void CreerJeuNeuf(int N, Localisation L, Tas *T) {
   }
 }
 
+/* destructeur (pour les tests) */
+void LibererTasPlein(Tas *T)
+{
+  pAdCarte currentCard = T->tete;
+  if (!TasVide(*T))
+  {
+    while (currentCard != NULL)
+    {
+      SupprimerCarteSous(T);
+      free(currentCard);
+      currentCard = T->tete;
+    }
+
+    SupprimerTasVide(T);
+  }
+}
+
 /* Consultation des cartes d'un tas: ne deplace pas la carte */
 
 /* *************************************************************

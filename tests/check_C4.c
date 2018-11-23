@@ -1,7 +1,5 @@
 #include "C4.h"
-#include <check.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "check_klondike.h"
 
 typedef Tas SerieCouleurC4;
 SerieCouleurC4 LigneC4[DerniereCouleur+1];
@@ -14,7 +12,6 @@ Localisation LocTalonC4;
 START_TEST (test_C4)
 {
   Couleur Co;
-  booleen Trouve = faux;
   int i = 0;
 
   OuvrirGraphique("test_C4");
@@ -54,7 +51,7 @@ Suite* C4_suite()
   Suite *s;
   TCase *tc_core;
 
-  s = suite_create("C4");
+  s = suite_create("\n C4");
 
   /* Core test case */
   tc_core = tcase_create("Core");
@@ -64,20 +61,4 @@ Suite* C4_suite()
   suite_add_tcase(s, tc_core);
 
   return s;
-}
-
-int main()
-{
-  int number_failed;
-  Suite *s;
-  SRunner *sr;
-
-  s = C4_suite();
-  sr = srunner_create(s);
-
-  srunner_run_all(sr, CK_NORMAL);
-  number_failed = srunner_ntests_failed(sr);
-  srunner_free(sr);
-
-  return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
