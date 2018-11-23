@@ -244,7 +244,8 @@ void runReussiteR7()
         printf(TexteNbAAnalyser);
         scanf("%d",&nbparties);
         printf(TexteNbPioche, NBMAXT);
-        scanf("%d", &NBMAXT);
+        defaultScanf(&NBMAXT, NBMAXT);
+        
         AnalyserR7(nbparties,NBMAXT);
         break;
 
