@@ -15,6 +15,8 @@ void LireCar(char	*c)
 	int l ;
 	while (isspace (l=getchar ())) ;
 	*c = l ;
+
+	cleanBuffer();
 }
 
 int EstTexteCommande (char c)
@@ -120,16 +122,26 @@ void chooseGame (codeGame *cG)
 	} while (!isGame (C));
 }
 
-void defaultScanf (int *value, int defaultValue)
+void defaultScanf (char *value, char defaultValue)
 {
-	char trash;
+	cleanBuffer();
 
 	*value = getchar();
 
 	/* set the default value */
-	if (*value == '\n') {
+	if (*value == '\n') { // new line in ASCII code
 		*value = defaultValue;
 	}
+	else
+	{
+		*value -= '0'; // transform char to int
+		cleanBuffer();
+	}
+}
+
+void cleanBuffer()
+{
+	char trash;
 
 	/* clean the buffer */
 	do trash = getchar();

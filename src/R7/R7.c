@@ -217,7 +217,7 @@ void AnalyserR7(int NP, int NMaxT)
 
 void runReussiteR7()
 {
-  int NBMAXT = 3;
+  char NBMAXT = 3;
 
   CodeCommande Commande ;
   int nbparties ;
@@ -231,7 +231,7 @@ void runReussiteR7()
     switch  (Commande) {
       case SIMUL :
         printf(TexteNbASimuler);
-        scanf("%d",&nbparties);
+        scanf("%d", &nbparties);
         printf(TexteNbPioche, NBMAXT);
         defaultScanf(&NBMAXT, NBMAXT);
 
@@ -242,7 +242,7 @@ void runReussiteR7()
 
       case ANALYSE :
         printf(TexteNbAAnalyser);
-        scanf("%d",&nbparties);
+        scanf("%d", &nbparties);
         printf(TexteNbPioche, NBMAXT);
         defaultScanf(&NBMAXT, NBMAXT);
 

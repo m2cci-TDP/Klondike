@@ -49,17 +49,18 @@ typedef enum {R7, C4, MD, finGame} codeGame;
 /* -------------------------------------------------------------------
 *      INTERACTION
 *
-*      EstTexteCommande : un caract�re ---> un bool�en
+*      EstTexteCommande : un caractère ---> un booléen
 *      EcrireMenu       : une action
-*      SaisirCommande   : une action (le r�sultat : un CodeCommande)
+*      SaisirCommande   : une action (le résultat : un CodeCommande)
 * -------------------------------------------------------------------
 */
 void LireCar(char*);
 int EstTexteCommande (char);
 void EcrireMenu ();
 void SaisirCommande (CodeCommande*);
-/* use fgets to output default value if simply enter input */
-void defaultScanf (int*, int);
+/* use getchar to output default value if simply enter input */
+void defaultScanf (char*, char);
+void cleanBuffer();
 
 /* for games */
 int isGame(char);
