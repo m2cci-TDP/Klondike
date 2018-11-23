@@ -222,7 +222,7 @@ void runReussiteR7()
   CodeCommande Commande ;
   int nbparties ;
 
-  printf (TexteBienvenue, "R7") ;
+  printf (TexteBienvenue, "du relais des 7") ;
 
   do
   {
@@ -245,7 +245,7 @@ void runReussiteR7()
         scanf("%d",&nbparties);
         printf(TexteNbPioche, NBMAXT);
         defaultScanf(&NBMAXT, NBMAXT);
-        
+
         AnalyserR7(nbparties,NBMAXT);
         break;
 
@@ -255,5 +255,5 @@ void runReussiteR7()
 
     NBMAXT = 3;
   } while (Commande != FIN);
-  printf (TexteAuRevoir) ;
+  printf (TexteAuRevoirGame, "du relais des 7") ;
 }

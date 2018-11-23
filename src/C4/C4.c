@@ -222,7 +222,7 @@ void runReussiteC4()
   CodeCommande Commande ;
   int nbparties ;
 
-  printf (TexteBienvenue, "C4") ;
+  printf (TexteBienvenue, "des quatre couleurs") ;
 
   do
   {
@@ -247,5 +247,5 @@ void runReussiteC4()
         break;
     }
   } while (Commande != FIN);
-  printf (TexteAuRevoir) ;
+  printf (TexteAuRevoirGame, "des quatre couleurs") ;
 }

@@ -24,7 +24,7 @@ int EstTexteCommande (char c)
 
 int isGame(char c)
 {
-	return (c == TexteR7) || (c == TexteC4) || (c == TexteFin);
+	return (c == TexteR7) || (c == TexteC4) || (c == TexteMD) || (c == TexteFinGame);
 }
 
 void EcrireMenu ()
@@ -39,9 +39,10 @@ void EcrireMenu ()
 void printGame(void)
 {
 	printf ("\nAide :\n") ;
-	printf (" %c pour jouer la réussite R7, \n", TexteR7) ;
-	printf (" %c pour jouer la réussite C4, \n", TexteC4);
-	printf (" %c pour Fin, \n",TexteFin);
+	printf (" %c pour jouer au relais des 7, \n", TexteR7) ;
+	printf (" %c pour jouer aux quatre couleurs, \n", TexteC4);
+	printf (" %c pour jouer à la Montée-Descente, \n", TexteMD);
+	printf (" %c pour Fin, \n",TexteFinGame);
 	printf (" %c pour Aide.\n",TexteAide);
 }
 
@@ -103,8 +104,12 @@ void chooseGame (codeGame *cG)
 			*cG = C4 ;
 			break ;
 
-			case TexteFin :
-			*cG = FIN ;
+			case TexteMD :
+			*cG = MD ;
+			break ;
+
+			case TexteFinGame :
+			*cG = finGame ;
 			break ;
 
 			default:

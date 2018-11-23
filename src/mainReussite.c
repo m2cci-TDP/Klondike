@@ -3,6 +3,7 @@
 
 #include "R7.h"
 #include "C4.h"
+#include "MD.h"
 #include "Interaction.h"
 #include "Alea.h"
 
@@ -32,10 +33,16 @@ int main(void)
       runReussiteC4();
       break;
 
+      case MD:
+      runReussiteMD();
+      break;
+
       default:
       break;
     }
-  } while (cG != FIN);
+  } while (cG != finGame);
+  
+  printf (TexteAuRevoir) ;
 
   return 0;
 }

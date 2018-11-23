@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "MD.h"
+#include "Interaction.h"
 #include "stats.h"
 
 char TexteCouleurMD[5][8] = {"", "Trefle", "Carreau", "Coeur", "Pique"};
@@ -21,7 +22,8 @@ Localisation LocTalonMD;
 
 /* Formation ducolor tableau de jeu initial */
 
-void SaisirLocTasMD() {
+void SaisirLocTasMD()
+{
     int i;
 
     LocTalonMD.NC = 1; /* placer le talon dans la premiere case du tableau */
@@ -35,7 +37,8 @@ void SaisirLocTasMD() {
     }
 }
 
-void CreerTableauInitialMD() /*creer les le talon + les tas*/ {
+void CreerTableauInitialMD() /*creer les le talon + les tas*/
+{
     Couleur Co;
     SaisirLocTasMD(); /*placer les 4 tas */
 
@@ -50,7 +53,8 @@ void CreerTableauInitialMD() /*creer les le talon + les tas*/ {
     }
 }
 
-void ReformerTableauInitialMD() {
+void ReformerTableauInitialMD()
+{
     Couleur Co;
 
     /* On reforme le talon, en empilant les cartes de la ligne et des tas de stockage*/
@@ -78,12 +82,14 @@ void ReformerTableauInitialMD() {
 
 /* Visualisation des états du jeu */
 
-void Monter(Tas *T) {
+void Monter(Tas *T)
+{
     Couleur Co = LaCouleur(CarteSur(*T));
     DeplacerHautSur(T, &LigneMD[Co]);
 }
 
-booleen Descendre(Tas *T) {
+booleen Descendre(Tas *T)
+{
     Rang R;
     R = LeRang(CarteSur(*T));
     int i, j;
@@ -111,7 +117,8 @@ booleen Descendre(Tas *T) {
     return X != 100;
 }
 
-void AfficherMD() {
+void AfficherMD()
+{
     Couleur Co;
 
     EffacerGraphique();
@@ -126,7 +133,8 @@ void AfficherMD() {
     AttendreCliquer();
 }
 
-booleen MonteStock() {
+booleen MonteStock()
+{
     int i = 1;
     Couleur Co;
     booleen OK = faux;
@@ -223,4 +231,37 @@ void AnalyserMD(int NP) {
 
     pctStats(stats);
     freeStats(&stats);
+}
+
+void runReussiteMD()
+{
+  //suppression de NBTOURS
+  CodeCommande Commande ;
+  int nbparties ;
+
+  printf (TexteBienvenue, "Montée-Descente") ;
+  do
+  {
+    SaisirCommande (&Commande) ;
+
+    switch  (Commande) {
+      case SIMUL :
+        printf(TexteNbASimuler);
+        scanf("%d",&nbparties);
+        OuvrirGraphique("MD");
+        ObserverMD(nbparties);
+        FermerGraphique();
+        break ;
+
+      case ANALYSE :
+        printf(TexteNbAAnalyser);
+        scanf("%d",&nbparties);
+        AnalyserMD(nbparties);
+        break;
+
+      default:
+        break;
+    }
+  } while (Commande != FIN);
+  printf (TexteAuRevoirGame, "Montée-Descente") ;
 }

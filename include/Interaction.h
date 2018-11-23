@@ -20,9 +20,17 @@
 * CONSTANTES
 * ----------------------------------------------------------
 */
-typedef enum {R7, C4} codeGame;
+/* -------------------------------------------------------------------
+* CodeCommande   : le type [SIMUL, ANALYSE, FIN]
+* -------------------------------------------------------------------
+*/
+typedef enum {SIMUL, ANALYSE, FIN} CodeCommande ;
+
+typedef enum {R7, C4, MD, finGame} codeGame;
 #define TexteR7 '1'
 #define TexteC4 '2'
+#define TexteMD '3'
+#define TexteFinGame 'F'
 
 #define Invite "\nVotre Choix (? pour liste des commandes) : "
 #define TexteSimulation '1'
@@ -35,7 +43,8 @@ typedef enum {R7, C4} codeGame;
 #define TexteNbAAnalyser "Choisissez le nombre de parties a analyser : "
 /* for R7 */
 #define TexteNbPioche "Choisissez le nombre maximum de tour de pioche (défaut %d) : "
-#define TexteAuRevoir "Au revoir \n"
+#define TexteAuRevoir "\nAu revoir \n"
+#define TexteAuRevoirGame "\n\t==== Vous quittez la réussite %s ====\n"
 
 /* -------------------------------------------------------------------
 *      INTERACTION
