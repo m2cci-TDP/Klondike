@@ -1,5 +1,5 @@
 # définition des cibles particulières
-.PHONY: clean, install
+.PHONY: clean
 
 # désactivation des règles implicites
 .SUFFIXES:

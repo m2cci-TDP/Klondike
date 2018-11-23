@@ -9,6 +9,7 @@
 #define _R7_H
 
 #include "AfficherTas.h"
+#include "Interaction.h"
 
 void SaisirLocTasR7();
 void CreerTableauInitialR7();
@@ -19,5 +20,7 @@ void JouerUnTourR7(ModeTrace);
 void JouerUneR7(int, ModeTrace);
 void ObserverR7(int, int);
 void AnalyserR7(int, int);
+
+void runReussiteR7();
 
 #endif

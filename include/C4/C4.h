@@ -4,6 +4,7 @@
 #define _C4_H
 
 #include "AfficherTas.h"
+#include "Interaction.h"
 
 void SaisirLocTasC4();
 void CreerTableauInitialC4();
@@ -15,5 +16,7 @@ void JouerC4(ModeTrace);
 booleen JouerUneC4(ModeTrace);
 void ObserverC4(int);
 void AnalyserC4(int);
+
+void runReussiteC4();
 
 #endif

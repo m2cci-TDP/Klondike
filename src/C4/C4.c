@@ -215,3 +215,36 @@ void AnalyserC4(int NP)
   pctStats(stats);
   freeStats(&stats);
 }
+
+void runReussiteC4()
+{
+  //suppression de NBTOURS
+  CodeCommande Commande ;
+  int nbparties ;
+
+  printf (TexteBienvenue, "C4") ;
+  SaisirCommande (&Commande) ;
+  while (Commande != FIN) {
+    switch  (Commande) {
+      case SIMUL :
+        printf(TexteNbASimuler);
+        scanf("%d",&nbparties);
+        OuvrirGraphique("C4");
+        ObserverC4(nbparties);
+        FermerGraphique();
+        break ;
+
+      case ANALYSE :
+        printf(TexteNbAAnalyser);
+        scanf("%d",&nbparties);
+        AnalyserC4(nbparties);
+        break;
+
+      default:
+        break;
+    }
+    SaisirCommande (&Commande) ;
+
+  }
+  printf (TexteAuRevoir) ;
+}

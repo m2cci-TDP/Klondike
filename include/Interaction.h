@@ -20,12 +20,18 @@
 * CONSTANTES
 * ----------------------------------------------------------
 */
-#define NbMaxEssais 5
-#define Invite "Votre Choix (? pour liste des commandes) : "
+#define Invite "\nVotre Choix (? pour liste des commandes) : "
 #define TexteSimulation '1'
 #define TexteAnalyse '2'
 #define TexteFin 'F'
 #define TexteAide '?'
+
+#define TexteBienvenue "\t==== Bienvenue dans la réussite %s ====\n"
+#define TexteNbASimuler "Choisissez le nombre de parties a simuler : "
+#define TexteNbAAnalyser "Choisissez le nombre de parties a analyser : "
+/* for R7 */
+#define TexteNbPioche "Choisissez le nombre maximum de tour de pioche (défaut %d) : "
+#define TexteAuRevoir "Au revoir \n"
 
 /* -------------------------------------------------------------------
 *      INTERACTION
@@ -39,5 +45,7 @@ void LireCar(char*);
 int EstTexteCommande (char);
 void EcrireMenu ();
 void SaisirCommande (CodeCommande*);
+/* use fgets to output default value if simply enter input */
+void defaultScanf (int*, int);
 
 #endif

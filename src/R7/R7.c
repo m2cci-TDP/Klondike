@@ -214,3 +214,42 @@ void AnalyserR7(int NP, int NMaxT)
   pctStats(stats);
   freeStats(&stats);
 }
+
+void runReussiteR7()
+{
+  int NBMAXT = 3;
+
+  CodeCommande Commande ;
+  int nbparties ;
+
+  printf (TexteBienvenue, "R7") ;
+  SaisirCommande (&Commande) ;
+  while (Commande != FIN) {
+    switch  (Commande) {
+      case SIMUL :
+        printf(TexteNbASimuler);
+        scanf("%d",&nbparties);
+        printf(TexteNbPioche, NBMAXT);
+        defaultScanf(&NBMAXT, NBMAXT);
+
+        OuvrirGraphique("R7");
+        ObserverR7(nbparties, NBMAXT);
+        FermerGraphique();
+        break ;
+
+      case ANALYSE :
+        printf(TexteNbAAnalyser);
+        scanf("%d",&nbparties);
+        printf(TexteNbPioche, NBMAXT);
+        scanf("%d", &NBMAXT);
+        AnalyserR7(nbparties,NBMAXT);
+        break;
+
+      default:
+        break;
+    }
+    SaisirCommande (&Commande) ;
+    NBMAXT = 3;
+  }
+  printf (TexteAuRevoir) ;
+}
