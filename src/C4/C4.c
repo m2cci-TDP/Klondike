@@ -17,7 +17,7 @@ Tas TalonC4;
 Localisation LocSeriesC4[DerniereCouleur+1];
 Localisation LocTalonC4;
 
-/* Formation ducolor tableau de jeu initial */
+/* Formation du tableau de jeu initial */
 
 void SaisirLocTasC4()
 {
@@ -54,53 +54,28 @@ void ReformerTableauInitialC4()
   Couleur Co;
 
   /* On reforme le talon, en empilant les cartes de la ligne */
+
   for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
-    /*
     EmpilerTas(&(LigneC4[Co]));
     PoserTasSurTas(&(LigneC4[Co]), &TalonC4);
     EtalerTas(&(LigneC4[Co]));
-    */
-    /* fix bug de retournement */
-    while (LaHauteur(LigneC4[Co]) != 0) {
-      if (EstDecouverte(CarteSur(LigneC4[Co]))) {
-        RetournerCarteSur(&LigneC4[Co]);
-      }
-      DeplacerHautSur(&LigneC4[Co], &TalonC4);
-    }
   }
-  /* RetournerTas(&TalonC4); */
+  RetournerTas(&TalonC4);
   BattreTas(&TalonC4);
 }
-
-/* fix bug DeplacerBasSur(T, T)
-A corriger dans Tas.c */
-void DeplacerBasSurC4(Tas *T1, Tas *T2)
-{
-  T2->queue->suiv = T1->tete;
-  T1->tete->prec = T2->queue;
-  T1->tete = T1->tete->suiv;
-  T1->tete->prec = NULL;
-  T2->queue = T2->queue->suiv;
-  T2->queue->suiv = NULL;
-}
-
-
 /* Visualisation des états du jeu */
-/* fix bug retournement lors du test de la réussite */
-void RetournerSiPasRetourner(Tas *T){
-  int i = 0;
-  while (EstCachee(CarteSur(*T))) {
-    RetournerCarteSur(T);
-    DeplacerHautSous(T, T);
-    i++;
-  }
-  while (i > 0) {
-    DeplacerBasSurC4(T, T);
-    i--;
-  }
-}
 
+void RetournerSiPasRetourner(Tas *T) { //Retourne les cartes non retournées d'un tas - Utilisée en fin de partie
+    int i;
+    for (i = LaHauteur(*T); i >= 1; i--) {
+        if (EstCachee(IemeCarte(*T, i))){
+            EchangerCartes(i, LaHauteur(*T), T);
+            RetournerCarteSur(T);
+            EchangerCartes(i, LaHauteur(*T), T);
+        }
+    }
+}
 void AfficherC4()
 {
   Couleur Co;
@@ -115,51 +90,38 @@ void AfficherC4()
   AttendreCliquer();
 }
 
-/* Jouer les 4 couleurs */
-/*void retournerTNR (tas *T)
-{
-Couleur Co = PremiereCouleur;
-for (i==LaHauteur(LigneC4[Co])-1;)
-}*/
 
 void JouerTasC4(Tas *T, Couleur *Co)
 {
   RetournerCarteSur(T);
-  *Co = LaCouleur(CarteSur(*T));
+  *Co=LaCouleur(CarteSur(*T));
   DeplacerHautSous(T, &LigneC4[*Co]);
   RetournerCarteSous(&LigneC4[*Co]);
 }
 
-booleen reussirC4(ModeTrace MT)
-{
-  Couleur Co = PremiereCouleur;
-  int i = 1;
+booleen reussirC4(ModeTrace MT) {
+    Couleur Co = PremiereCouleur;
+    int i = 1;
+    int j;
 
-  if (MT == AvecTrace)
-  {
-    RetournerSiPasRetourner(&LigneC4[Co]);
-  }
-  while (LaHauteur(LigneC4[Co]) == NbCartes/4 && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
-  {
-    if (i == LaHauteur(LigneC4[Co]))
-    {
-      i = 1;
-      Co = CouleurSuivante(Co);
-      if (MT == AvecTrace)
-      {
-        RetournerSiPasRetourner(&LigneC4[Co]);
-      }
-    }
-    else
-    {
-      i++;
-    }
-  }
-  if (MT == AvecTrace) {
-    AfficherC4();
-  }
+    while (LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == 8))) { //Trouver l'intrus dans la couleur, si non trouvé = gagné
 
-  return (Co == DerniereCouleur) && (i == NbCartes/4);
+        if (i == LaHauteur(LigneC4[Co])) {
+            i = 0;
+            Co = CouleurSuivante(Co);
+        } else {
+            i++;
+        }
+    }
+    for (j = 1; j < 5; j++) { //Retourner toutes les cartes non retournées en fin de partie
+        if (MT == AvecTrace) {
+            RetournerSiPasRetourner(&LigneC4[j]);
+
+        }
+        
+    }
+    if (MT == AvecTrace) AfficherC4();
+    return (Co == DerniereCouleur) && (i == NbCartes / 4);
 }
 
 void JouerC4(ModeTrace MT)
@@ -172,9 +134,9 @@ void JouerC4(ModeTrace MT)
   Couleur Co;
   int i;
 
-  for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
+  for(Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
   {
-    for (i=0; i<NbCartes/4; i++) /* mettre 8 cartes dans chaque tas (distribution) */
+    for(i=0; i<NbCartes/4; i++) /* mettre 8 cartes dans chaque tas (distribution) */
     {
       DeplacerHautSous(&TalonC4, &(LigneC4[Co]));
     }
