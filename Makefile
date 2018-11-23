@@ -15,10 +15,12 @@ libBIN = $(libDIR)/bin
 dirSRC = src
 dirSrcR7 = $(dirSRC)/R7
 dirSrcC4 = $(dirSRC)/C4
+dirSrcMD = $(dirSRC)/MD
 #dirSrcQLL = $(dirSRC)/QLL
 dirINCL = include
 dirInclR7 = $(dirINCL)/R7
 dirInclC4 = $(dirINCL)/C4
+dirInclMD = $(dirINCL)/MD
 dirBIN = bin
 
 CC = gcc
@@ -33,6 +35,7 @@ srcC4 = $(dirSrcC4)/C4.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 objR7 = $(patsubst %.c, %.o, $(srcR7))
 objC4 = $(patsubst %.c, %.o, $(srcC4))
+objMD = $(patsubst %.c, %.o, $(srcMD))
 
 all: librairies $(EXECR7) $(EXECC4) $(EXEC) install
 
@@ -43,6 +46,9 @@ $(EXECR7): $(libBIN)/libmachine_trace.a $(OBJ) $(objR7) $(dirSrcR7)/ReussiteR7.c
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(EXECC4): $(libBIN)/libmachine_trace.a $(OBJ) $(objC4) $(dirSrcC4)/ReussiteC4.c
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+ReussiteMD.e: $(libBIN)/libmachine_trace.a $(OBJ) $(objMD) $(dirSrcMD)/ReussiteMD.c
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 #ReussiteQLL.e: $(libBIN)/libmachine_tra	ce.a $(OBJ) QLL.o InteractionQLL.o $(dirSrcQLL)/ReussiteQLL.c
@@ -56,7 +62,7 @@ librairies:
 
 install:
 	mkdir -p $(dirBIN)
-	mv $(OBJ) $(objR7) $(objC4) ${dirBIN}/
+	mv $(OBJ) $(objR7) $(objC4) $(objMD) ${dirBIN}/
 
 check:
 	make -C tests #check.e
