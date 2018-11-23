@@ -1,5 +1,6 @@
 #include "Tas.h"
 #include "check_klondike.h"
+#include <stdio.h>
 
 START_TEST (test_card_bool)
 {
@@ -35,12 +36,40 @@ START_TEST (test_card_bool)
 }
 END_TEST
 
+/* global deck for tests */
+Tas T;
+Localisation L = {1, 1};
+
+void setup(void)
+{
+  CreerTasVide(L, empile, &T);
+}
+
+void teardown(void)
+{
+  LibererTasPlein(&T);
+/*
+  START_TEST (test_free)
+  {
+    ck_assert_msg(TasVide(T),
+    "Echec de la création du tas (vide après création)");
+    printf("%d==%d tete=%p\n", inactif, T.RT, T.tete);
+    ck_assert_msg(!TasActif(T),
+    "Echec de la création du tas (inactif après création)");
+  }
+  END_TEST
+  */
+}
+
+START_TEST (test_exit_fail)
+{
+  fclose(stdout);
+  CreerJeuNeuf(10, (Localisation){1,1}, &T);
+}
+END_TEST
+
 START_TEST (test_deck_bool)
 {
-  Tas T;
-  Localisation L = {1, 1};
-
-  CreerTasVide(L, empile, &T);
   ck_assert_msg(TasActif(T),
   "Echec de la création du tas (inactif)");
   ck_assert_msg(LaPlace(T).NC == L.NC && LaPlace(T).NL == L.NL,
@@ -55,9 +84,7 @@ START_TEST (test_deck_bool)
   "Echec de la création du tas (non étalé)");
 
   CreerJeuNeuf(32, L, &T);
-  LibererTasPlein(&T);
-  ck_assert_msg(TasVide(T),
-  "Echec de la création du tas (vide après création)");
+  ck_assert_int_eq(LaHauteur(T), 32);
 }
 END_TEST
 
@@ -68,11 +95,15 @@ Suite* Tas_suite()
 
   s = suite_create("Tas.c");
 
+  /* Card */
+  tc_core = tcase_create("Cards");
+  tcase_add_test(tc_core, test_card_bool);
+  suite_add_tcase(s, tc_core);
+
   /* Core test case */
   tc_core = tcase_create("Core");
-  tcase_set_timeout(tc_core, (double)4);
-
-  tcase_add_test(tc_core, test_card_bool);
+  tcase_add_checked_fixture(tc_core, setup, teardown);
+  tcase_add_exit_test(tc_core, test_exit_fail, 1);
   tcase_add_test(tc_core, test_deck_bool);
   suite_add_tcase(s, tc_core);
 

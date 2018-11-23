@@ -26,6 +26,11 @@
 
 `git pull`
 
+### For running tests
+
+`sudo apt-get install check valgrind` <br />
+`make check`
+
 
 <!--
 ## Welcome to GitHub Pages

@@ -59,8 +59,8 @@ install:
 	mv $(OBJ) $(objR7) $(objC4) ${dirBIN}/
 
 check:
-	make -C tests check.e
-	tests/check.e
+	make -C tests #check.e
+	#tests/check.e
 
 clean:
 	make -C tests clean

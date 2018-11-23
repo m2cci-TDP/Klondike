@@ -8,8 +8,7 @@ Tas TalonC4;
 Localisation LocSeriesC4[DerniereCouleur+1];
 Localisation LocTalonC4;
 
-
-START_TEST (test_C4)
+void setupC4(void)
 {
   Couleur Co;
   int i = 0;
@@ -31,7 +30,15 @@ START_TEST (test_C4)
       DeplacerHautSous(&TalonC4, &LigneC4[Co]);
     }
   }
+}
 
+void teardownC4(void)
+{
+    FermerGraphique();
+}
+
+START_TEST (test_C4)
+{
   /* test vrai lorsqu'on ne bat pas le talon */
   ck_assert_msg(reussirC4(AvecTrace) == vrai,
     "Sans battre le tas, un placement correct est attendu.");
@@ -41,8 +48,6 @@ START_TEST (test_C4)
   ck_assert_msg(reussirC4(AvecTrace) == faux,
     "En Déplaçant une carte d'un tas sur un autre, un placement incorrect est attendu.");
   //ck_assert_int_eq(reussirC4(AvecTrace), faux);
-
-  FermerGraphique();
 }
 END_TEST
 
@@ -56,7 +61,7 @@ Suite* C4_suite()
   /* Core test case */
   tc_core = tcase_create("Core");
   tcase_set_timeout(tc_core, (double)0); /* turn off the timeout functionality CK_DEFAULT_TIMEOUT = 4' */
-
+  tcase_add_checked_fixture(tc_core, setupC4, teardownC4);
   tcase_add_test(tc_core, test_C4);
   suite_add_tcase(s, tc_core);
 
