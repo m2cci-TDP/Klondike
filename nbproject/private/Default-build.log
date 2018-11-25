@@ -1,0 +1,24 @@
+make -C lib/
+make[1] : on entre dans le répertoire « /home/mohammed/Klondike/lib »
+gcc -Iinclude -c -g src/machine_trace.c
+gcc -Iinclude -c -g src/graphlib_w.c
+gcc -Iinclude -c -g src/memoire.c
+gcc -Iinclude -c -g src/Fichiers.c
+ar rc libmachine_trace.a machine_trace.o graphlib_w.o memoire.o Fichiers.o
+mkdir -p bin
+mv machine_trace.o graphlib_w.o memoire.o Fichiers.o libmachine_trace.a bin/
+make[1] : on quitte le répertoire « /home/mohammed/Klondike/lib »
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/AfficherTas.o src/AfficherTas.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/Alea.o src/Alea.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/Interaction.o src/Interaction.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/stats.o src/stats.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/Tas.o src/Tas.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/R7/R7.o src/R7/R7.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg -o ReussiteR7.e lib/bin/libmachine_trace.a src/AfficherTas.o src/Alea.o src/Interaction.o src/stats.o src/Tas.o src/R7/R7.o src/R7/ReussiteR7.c -Llib/bin -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/C4/C4.o src/C4/C4.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg -o ReussiteC4.e lib/bin/libmachine_trace.a src/AfficherTas.o src/Alea.o src/Interaction.o src/stats.o src/Tas.o src/C4/C4.o src/C4/ReussiteC4.c -Llib/bin -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg   -c -o src/MD/MD.o src/MD/MD.c
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg -o ReussiteMD.e lib/bin/libmachine_trace.a src/AfficherTas.o src/Alea.o src/Interaction.o src/stats.o src/Tas.o src/MD/MD.o src/MD/ReussiteMD.c -Llib/bin -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
+gcc -g -no-pie -Ilib/include -Iinclude -Iinclude/R7 -Iinclude/C4 -Iinclude/MD -Iimg -o Reussites.e lib/bin/libmachine_trace.a src/AfficherTas.o src/Alea.o src/Interaction.o src/stats.o src/Tas.o src/R7/R7.o src/C4/C4.o src/MD/MD.o src/mainReussite.c -Llib/bin -lmachine_trace -L/usr/X11R6/lib -lX11 -lm
+mkdir -p bin
+mv  src/AfficherTas.o  src/Alea.o  src/Interaction.o  src/stats.o  src/Tas.o  src/R7/R7.o  src/C4/C4.o  src/MD/MD.o bin/

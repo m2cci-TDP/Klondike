@@ -106,27 +106,26 @@ booleen reussirC4(ModeTrace MT)
 {
   Couleur Co = PremiereCouleur;
   int i = 1;
-
-  if (MT == AvecTrace)
-  {
-    DecouvrirCartesTas(&LigneC4[Co]);
-  }
+  int j;
+  
   while (LaHauteur(LigneC4[Co]) == NbCartes/4 && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
   {
     if (i == LaHauteur(LigneC4[Co]))
     {
       i = 1;
       Co = CouleurSuivante(Co);
-      if (MT == AvecTrace)
-      {
-        DecouvrirCartesTas(&LigneC4[Co]);
-      }
     }
     else
     {
       i++;
+        }
+
     }
-  }
+    for (j = 1; j < 5; j++) {
+        if (MT == AvecTrace) {
+            DecouvrirCartesTas(&LigneC4[j]);
+        }
+    } 
   if (MT == AvecTrace) {
     AfficherC4();
   }

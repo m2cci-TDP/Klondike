@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="bin">
+      </df>
+      <df name="img">
+      </df>
+      <df name="include">
+        <df name="C4">
+          <in>C4.h</in>
+        </df>
+        <df name="MD">
+          <in>MD.h</in>
+        </df>
+        <df name="R7">
+          <in>R7.h</in>
+        </df>
+        <in>AfficherTas.h</in>
+        <in>Alea.h</in>
+        <in>Interaction.h</in>
+        <in>Tas.h</in>
+        <in>TypesConst.h</in>
+        <in>stats.h</in>
+      </df>
+      <df name="lib">
+        <df name="bin">
+        </df>
+        <df name="include">
+          <in>EntreesSorties.h</in>
+          <in>Fichiers.h</in>
+          <in>graphlib_w.h</in>
+          <in>machine_trace.h</in>
+          <in>memoire.h</in>
+        </df>
+        <df name="src">
+          <in>EntreesSorties.c</in>
+          <in>Fichiers.c</in>
+          <in>graphlib_w.c</in>
+          <in>machine_trace.c</in>
+          <in>memoire.c</in>
+        </df>
+      </df>
+      <df name="src">
+        <df name="C4">
+          <in>C4.c</in>
+          <in>ReussiteC4.c</in>
+        </df>
+        <df name="MD">
+          <in>MD.c</in>
+          <in>ReussiteMD.c</in>
+        </df>
+        <df name="R7">
+          <in>R7.c</in>
+          <in>ReussiteR7.c</in>
+        </df>
+        <in>AfficherTas.c</in>
+        <in>Alea.c</in>
+        <in>Interaction.c</in>
+        <in>Tas.c</in>
+        <in>mainReussite.c</in>
+        <in>mainStats.c</in>
+        <in>stats.c</in>
+      </df>
+      <df name="tests">
+        <in>check_C4.c</in>
+        <in>check_Tas.c</in>
+        <in>check_klondike.h</in>
+        <in>check_main.c</in>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>
