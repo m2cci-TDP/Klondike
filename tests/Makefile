@@ -16,7 +16,7 @@ OBJ = check_Tas.o check_C4.o
 EXEC = check.e
 
 all: compilation $(EXEC)
-	valgrind --leak-check=full -q --undef-value-errors=no ./$(EXEC)
+	./$(EXEC)
 
 %.o: %.c
 	gcc -Wall $(CFLAGS) -c $<
@@ -26,6 +26,9 @@ $(EXEC): check_main.c $(OBJ) ../bin/*.o ../lib/bin/libmachine_trace.a
 
 compilation:
 	make -C ..
+
+memoryLeaks:
+	valgrind --leak-check=full -q --undef-value-errors=no ./$(EXEC)
 
 clean:
 	rm -f *.o check.e

@@ -50,6 +50,8 @@ booleen MemeCouleur(Carte C1, Carte C2);
 
 booleen EstCarteAvant(Carte C1, Carte C2);
 
+booleen MemeTas (Tas *T1, Tas *T2);
+
 /* Representation des tas */
 
 	/* Testeurs et selecteurs */

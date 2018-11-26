@@ -102,6 +102,27 @@ booleen EstCarteAvant(Carte C1, Carte C2) {
   return CouleurInferieure(C1, C2) || (MemeCouleur(C1, C2) && RangInferieur(C1, C2));
 }
 
+/* compare deux tas de même hauteur */
+booleen MemeTas (Tas *T1, Tas *T2)
+{
+  int nbCardsEq = 0, hi, hT = LaHauteur(*T1);
+
+  if (hT != LaHauteur(*T2))
+  {
+    printf("\'T1\' and \'T2\' must have the same height.");
+    exit(1);
+  }
+  /* test the current deck with other */
+  for (hi = 1; hi <= hT; hi++)
+  {
+    nbCardsEq += MemeRang(CarteSous(*T1), CarteSous(*T2)) && MemeCouleur(CarteSous(*T1), CarteSous(*T2));
+    DeplacerBasSur(T1, T1);
+    DeplacerBasSur(T2, T2);
+  }
+
+  return nbCardsEq == hT;
+}
+
 /* Representation des tas */
 
 /* Testeurs et selecteurs */

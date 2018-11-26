@@ -89,52 +89,49 @@ START_TEST (test_deck_bool)
 END_TEST
 
 /* Test if NB_DECK are different after shuffle */
-START_TEST (test_shuffled_deck)
+Tas tableT[NB_DECK];
+const int nbCards = 32;
+const int alpha = 0.05; /* hypothèse de première espèce */
+int nbDecksEq = 0;
+void setupShuffle (void)
 {
-  const int nbCartes = 32;
-  Tas T[NB_DECK];
-  int i, j, hi, nbFail = 0;
-
+  int i;
   /* create decks */
   for (i = 0; i < NB_DECK; i++)
   {
-    CreerTasVide((Localisation){1,1}, empile, T+i);
-    CreerJeuNeuf(nbCartes, (Localisation){1,1}, T+i);
-    BattreTas(T+i);
+    CreerTasVide((Localisation){1,1}, empile, tableT+i);
+    CreerJeuNeuf(nbCards, (Localisation){1,1}, tableT+i);
+    BattreTas(tableT+i);
   }
-
-  /* compare decks */
-  i = 0;
-  j = 1;
-  while (i < NB_DECK - 1 && nbFail != nbCartes)
-  {
-    nbFail = 0;
-    /* test the current deck with other */
-    for (hi = 0; hi < nbCartes; hi++)
-    {
-      nbFail += MemeRang(CarteSous(T[i]), CarteSous(T[j])) && MemeCouleur(CarteSous(T[i]), CarteSous(T[j]));
-      DeplacerBasSur(T+i, T+i);
-      DeplacerBasSur(T+j, T+j);
-    }
-    if (j < NB_DECK)
-    {
-      /* test the next deck */
-      j++;
-    }
-    else {
-      /* test the next deck with all other */
-      i++;
-      j = i + 1;
-    }
-  }
-
+}
+void teardownShuffle (void)
+{
+  int i;
   /* free decks */
   for (i = 0; i < NB_DECK; i++)
   {
-    LibererTasPlein(T+i);
+    LibererTasPlein(tableT+i);
   }
-
-  ck_assert_int_eq(i, NB_DECK);
+}
+START_TEST (test_shuffled_deck)
+{
+  int i;
+  /* compare decks */
+  for (i = 0; i < NB_DECK; i++)
+  {
+    /* looping test */
+    if (i != _i && MemeTas (tableT+i, tableT+_i))
+    {
+      ck_abort_msg ("Echec entre %d et %d.", i, _i);
+      nbDecksEq++;
+    }
+  }
+}
+END_TEST
+START_TEST (test_all_shuffled_deck)
+{
+  ck_assert_msg(nbDecksEq / NB_DECK <= alpha,
+    "Le mélange aléatoire des jeux de cartes ne respecte pas l'hypothèse de 5%% égaux.");
 }
 END_TEST
 
@@ -159,8 +156,10 @@ Suite* Tas_suite()
 
   /* Test shuffle */
   tc_core = tcase_create("Shuffle");
+  tcase_add_checked_fixture(tc_core, setupShuffle, teardownShuffle);
   tcase_set_timeout(tc_core, (double)0); /* turn off the timeout functionality CK_DEFAULT_TIMEOUT = 4' */
-  tcase_add_test(tc_core, test_shuffled_deck);
+  tcase_add_loop_test (tc_core, test_shuffled_deck, 0, NB_DECK);
+  tcase_add_test(tc_core, test_all_shuffled_deck);
   suite_add_tcase(s, tc_core);
 
   return s;

@@ -3,7 +3,7 @@
 
 #include <check.h>
 
-#define NB_DECK 10
+#define NB_DECK 1000
 
 Suite* C4_suite();
 
