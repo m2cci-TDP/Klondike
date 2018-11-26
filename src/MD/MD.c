@@ -127,7 +127,6 @@ void AfficherMD()
     for (Co = PremiereCouleur; Co <= DerniereCouleur; Co++) {
         AfficherTas(LigneMD[Co], TexteCouleurMD[Co]);
         AfficherTas(Tastock[Co], "");
-
     }
 
     AttendreCliquer();
@@ -152,8 +151,6 @@ booleen MonteStock()
         }
     }
     return OK;
-
-
 }
 
 booleen JouerUneMD(ModeTrace MT) {
@@ -196,9 +193,7 @@ booleen JouerUneMD(ModeTrace MT) {
 
         }
     }
-    if (TasVide(TalonMD)) {
-        return vrai;
-    } else return faux;
+    return TasVide(TalonMD);
 }
 
 
@@ -216,6 +211,8 @@ void ObserverMD(int NP) {
         ReformerTableauInitialMD();
         i++;
     }
+    // free
+    LibererTasPlein(&TalonMD);
 }
 
 void AnalyserMD(int NP) {
@@ -228,6 +225,8 @@ void AnalyserMD(int NP) {
         ReformerTableauInitialMD();
         i++;
     }
+    // free
+    LibererTasPlein(&TalonMD);
 
     pctStats(stats);
     freeStats(&stats);

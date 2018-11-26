@@ -177,6 +177,7 @@ void JouerUneR7(int NMaxT, ModeTrace MT)
 void ObserverR7(int NP, int NMaxT)
 {
   int i = 0;
+  Couleur Co;
 
   CreerTableauInitialR7();
   while (i < NP)
@@ -193,13 +194,19 @@ void ObserverR7(int NP, int NMaxT)
     ReformerTableauInitialR7();
     i++;
   }
-
-
+  // free
+  for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
+  {
+    EmpilerTas(&LigneR7[Co]);
+    PoserTasSurTas(&LigneR7[Co], &TalonR7);
+  }
+  LibererTasPlein(&TalonR7);
 }
 
 void AnalyserR7(int NP, int NMaxT)
 {
   int i = 0;
+  Couleur Co;
   pStatsKlondike stats = initStats();
 
   CreerTableauInitialR7();
@@ -210,6 +217,13 @@ void AnalyserR7(int NP, int NMaxT)
     ReformerTableauInitialR7();
     i++;
   }
+  // free
+  for (Co=PremiereCouleur; Co<=DerniereCouleur; Co++)
+  {
+    EmpilerTas(&LigneR7[Co]);
+    PoserTasSurTas(&LigneR7[Co], &TalonR7);
+  }
+  LibererTasPlein(&TalonR7);
 
   pctStats(stats);
   freeStats(&stats);
