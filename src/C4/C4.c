@@ -193,6 +193,8 @@ void ObserverC4(int NP)
     ReformerTableauInitialC4();
     i++;
   }
+  // free
+  LibererTasPlein(&TalonC4);
 }
 
 void AnalyserC4(int NP)
@@ -206,6 +208,8 @@ void AnalyserC4(int NP)
     ReformerTableauInitialC4();
     i++;
   }
+  // free
+  LibererTasPlein(&TalonC4);
 
   pctStats(stats);
   freeStats(&stats);
