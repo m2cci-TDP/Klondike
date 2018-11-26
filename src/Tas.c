@@ -406,7 +406,7 @@ void BattreTas(Tas *T) {
   /* InitAlea(); // déjà fait dans le main */
   int i = LaHauteur(*T), nbAlea;
 
-  while (i > 0)
+  while (i > 1)
   {
     nbAlea = UnEntier(i);
     EchangerCartes(nbAlea, i, T);
