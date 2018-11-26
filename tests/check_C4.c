@@ -34,7 +34,14 @@ void setupC4(void)
 
 void teardownC4(void)
 {
-    FermerGraphique();
+  Couleur Co;
+  // free
+  for (Co = DerniereCouleur; Co >= PremiereCouleur; Co--) /* remettre sur tas */
+  {
+    LibererTasPlein(&LigneC4[Co]);
+  }
+
+  FermerGraphique();
 }
 
 START_TEST (test_C4)
