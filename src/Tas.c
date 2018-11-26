@@ -404,7 +404,7 @@ https://fr.wikipedia.org/wiki/M%C3%A9lange_de_Fisher-Yates
 **************************************************************** */
 void BattreTas(Tas *T) {
   /* InitAlea(); // déjà fait dans le main */
-  int i = LaHauteur(*T) - 1, nbAlea;
+  int i = LaHauteur(*T), nbAlea;
 
   while (i > 0)
   {
