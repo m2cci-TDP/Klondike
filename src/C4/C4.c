@@ -105,9 +105,8 @@ void JouerTasC4(Tas *T, Couleur *Co)
 booleen reussirC4(ModeTrace MT)
 {
   Couleur Co = PremiereCouleur;
-  int i = 1;
-  int j;
-  
+  int i = 1, j;
+
   while (LaHauteur(LigneC4[Co]) == NbCartes/4 && LaCouleur(IemeCarte(LigneC4[Co], i)) == Co && !((Co == DerniereCouleur) && (i == NbCartes/4)))
   {
     if (i == LaHauteur(LigneC4[Co]))
@@ -118,15 +117,12 @@ booleen reussirC4(ModeTrace MT)
     else
     {
       i++;
-        }
-
     }
-    for (j = 1; j < 5; j++) {
-        if (MT == AvecTrace) {
-            DecouvrirCartesTas(&LigneC4[j]);
-        }
-    } 
+  }
   if (MT == AvecTrace) {
+    for (j = 1; j < 5; j++) {
+      DecouvrirCartesTas(&LigneC4[j]);
+    }
     AfficherC4();
   }
 
